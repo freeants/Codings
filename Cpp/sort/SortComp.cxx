@@ -9,9 +9,10 @@
 #include <iomanip>
 using namespace std;
 
-const int max_size = 19999; // Size of data dictionary
+int max_size; // Size of data dictionary
 
 int *a; // Data dictionary
+int *t; // Temp data dictionary
 
 void bubbleSort(int arr[], int n)
 {
@@ -112,6 +113,12 @@ int GenRandomNumber()
     return distr(gen);
 }
 
+void getInput()
+{
+    cout << "Enter the size of data set: ";
+    cin >> max_size;
+}
+
 void BuildDataDictionary()
 {
     cout << "Building data dictionary ... (size: " << max_size << ") - ";
@@ -119,6 +126,7 @@ void BuildDataDictionary()
     auto t0 = chrono::high_resolution_clock::now(); //get start time
     // Define the array that holds all data
     a = new int[max_size];
+    t = new int[max_size];
 
     // Assign values to array
     for (int i = 0; i < max_size; i++)
@@ -128,32 +136,58 @@ void BuildDataDictionary()
     cout << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << " micro(μ) seconds" << endl;
 }
 
+void copyArry(int *x, int *y)
+{
+    for (int i = 0; i < max_size; i++)
+        y[i] = x[i];
+}
+
+bool isSorted(int *arr)
+{
+    for (int i = 1; i < max_size; i++)
+        if (arr[i] < arr[i - 1])
+            return false;
+    return true;
+}
+
 void test()
 {
-    cout << "Sorting ... " << endl;
+    cout << "Comparing sort algorithms ..." << endl;
+    cout << "//////////////////////////////////////////////////" << endl;
 
     auto t0 = chrono::high_resolution_clock::now(); //get start time
-    bubbleSort(a, max_size);
+    copyArry(a, t);
+    bubbleSort(t, max_size);
     auto t1 = chrono::high_resolution_clock::now(); //get end time
-    cout << left << setw(20) << "Bubble -" << setw(20) << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << endl;
+    cout << left << setw(20) << "Bubble" << setw(20) << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << isSorted(t) << endl;
 
-    selectionSort(a, max_size);
+    copyArry(a, t);
+    selectionSort(t, max_size);
     auto t2 = chrono::high_resolution_clock::now(); //get end time
-    cout << left << setw(20) << "Selection -" << setw(20) << chrono::duration_cast<chrono::microseconds>(t2 - t1).count() << endl;
-    
-    insertionSort(a, max_size);
-    auto t3 = chrono::high_resolution_clock::now(); //get end time
-    cout << left << setw(20) << "Insertion -" << setw(20) << chrono::duration_cast<chrono::microseconds>(t3 - t2).count() << endl;
+    cout << left << setw(20) << "Selection" << setw(20) << chrono::duration_cast<chrono::microseconds>(t2 - t1).count() << isSorted(t) << endl;
 
-    quickSort(a, 0, max_size - 1);
+    copyArry(a, t);
+    insertionSort(t, max_size);
+    auto t3 = chrono::high_resolution_clock::now(); //get end time
+    cout << left << setw(20) << "Insertion" << setw(20) << chrono::duration_cast<chrono::microseconds>(t3 - t2).count() << isSorted(t) << endl;
+
+    copyArry(a, t);
+    quickSort(t, 0, max_size - 1);
     auto t4 = chrono::high_resolution_clock::now(); //get end time
-    cout << left << setw(20) << "Quick -" << setw(20) << chrono::duration_cast<chrono::microseconds>(t4 - t3).count() << endl;
+    cout << left << setw(20) << "Quick" << setw(20) << chrono::duration_cast<chrono::microseconds>(t4 - t3).count() << isSorted(t) << endl;
+
+    //auto timeElapsed = chrono::duration_cast<chrono::microseconds>(t4 - t0);
+    cout << endl;
+  
 }
 
 int main()
 {
     try
     {
+        // Get input
+        getInput();
+
         // Instantiation
         BuildDataDictionary();
 
@@ -166,5 +200,6 @@ int main()
         return -1;
     }
     delete[] a;
+    delete[] t;
     return 0;
 }
