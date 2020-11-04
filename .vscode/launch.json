@@ -1,0 +1,97 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - mmm",
+            "request": "launch",
+            "mainClass": "ALGO4.mmm",
+            "projectName": "MyCoding_14356028"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - test",
+            "request": "launch",
+            "mainClass": "ALGO4.test",
+            "projectName": "MyCoding_14356028"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - HelloDateApp",
+            "request": "launch",
+            "mainClass": "TIJ4.HelloDateApp",
+            "projectName": "MyCoding_14356028"
+        },
+        {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "g++ build active file",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - gcdApp",
+            "request": "launch",
+            "mainClass": "ALGO4.gcdApp",
+            "projectName": "MyCoding_14356028"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "VirusBroadcast"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - HelloDateApp",
+            "request": "launch",
+            "mainClass": "HelloDateApp",
+            "projectName": "MyCoding_29ed363d"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - HelloDate",
+            "request": "launch",
+            "mainClass": "HelloDate",
+            "projectName": "MyCoding_29ed363d"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - HelloDate",
+            "request": "launch",
+            "mainClass": "HelloDate",
+            "projectName": "My Coding_8dc2e757"
+        },
+        {
+            "name": "(lldb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "enter program name, for example ${workspaceFolder}/a.out",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        }
+    ]
+}
