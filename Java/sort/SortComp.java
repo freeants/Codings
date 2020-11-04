@@ -63,7 +63,7 @@ public class SortComp {
     static void insertionSort(int arr[], int n) {
         int i, j, tmp;
         for (i = 1; i < n; i++) {
-            j = 1;
+            j = i;
             while (j > 0 && arr[j - 1] > arr[j]) {
                 tmp = arr[j];
                 arr[j] = arr[j - 1];
@@ -113,7 +113,7 @@ public class SortComp {
 
         long endTime = System.nanoTime();
         long timeElapsed = endTime - startTime;
-        System.out.println("- " + timeElapsed / 1000000 + " micro(μ) seconds.");
+        System.out.println("- " + timeElapsed / 1000 + " micro(μ) seconds.");
     }
 
     /*
@@ -125,19 +125,19 @@ public class SortComp {
         long t0 = System.nanoTime();
         bubbleSort(a, max_size);
         long t1 = System.nanoTime();
-        System.out.println("Bubble - " + (t1 - t0) / 1000000);
+        System.out.println("Bubble - " + (t1 - t0) / 1000);
 
         selectionSort(a, max_size);
         long t2 = System.nanoTime();
-        System.out.println("Select - " + (t2 - t1) / 1000000);
+        System.out.println("Select - " + (t2 - t1) / 1000);
 
         insertionSort(a, max_size);
         long t3 = System.nanoTime();
-        System.out.println("Insert - " + (t3 - t2) / 1000000);
+        System.out.println("Insert - " + (t3 - t2) / 1000);
 
         quickSort(a, 0, max_size - 1);
         long t4 = System.nanoTime();
-        System.out.println("Quick  - " + (t4 - t3) / 1000000);
+        System.out.println("Quick  - " + (t4 - t3) / 1000);
 
     }
 

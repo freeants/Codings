@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - SortComp",
+            "request": "launch",
+            "mainClass": "sort.SortComp",
+            "projectName": "MyCoding_29ed363d"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - mmm",
             "request": "launch",
             "mainClass": "ALGO4.mmm",
