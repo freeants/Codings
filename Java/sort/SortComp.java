@@ -1,11 +1,12 @@
 package sort;
 
-//import java.util.concurrent.TimeUnit; // for timing the process
 import java.util.concurrent.ThreadLocalRandom; // standard way to genrate random number in Java 1.7 and above
+import java.util.Scanner;
 
 public class SortComp {
-    static int max_size = 19999; // size of data set
+    static int max_size; // size of data set
     static int a[]; // the data set array
+    static int t[]; // the temp data set
 
     /*
      * Bubble Sort method
@@ -95,7 +96,7 @@ public class SortComp {
      * Generate random number
      */
     static int GenRndNum() {
-        return ThreadLocalRandom.current().nextInt(0, 101);
+        return ThreadLocalRandom.current().nextInt(0, max_size);
     }
 
     /*
@@ -106,6 +107,7 @@ public class SortComp {
         long startTime = System.nanoTime();
         // define the array
         a = new int[max_size];
+        t = new int[max_size];
 
         // assign values to array
         for (int i = 0; i < max_size; i++)
@@ -116,36 +118,59 @@ public class SortComp {
         System.out.println("- " + timeElapsed / 1000 + " micro(μ) seconds.");
     }
 
+    static void copyArry(int x[], int y[]) {
+        for (int i = 0; i < max_size; i++)
+            y[i] = x[i];
+    }
+
+    static boolean isSorted(int arr[]) {
+        for (int i = 1; i < max_size; i++)
+            if (arr[i] < arr[i - 1])
+                return false;
+        return true;
+    }
+
+    static void getInput() {
+        Scanner reader = new Scanner(System.in);
+        System.out.print("Enter the size of data set: ");
+        max_size = reader.nextInt();
+        reader.close();
+    }
+
     /*
      * Do the test algorithm seris
      */
     static void test() {
-        System.out.println("Sorting ...");
+        System.out.println("Sorting (Java)...");
 
         long t0 = System.nanoTime();
-        bubbleSort(a, max_size);
+        copyArry(a, t);
+        bubbleSort(t, max_size);
         long t1 = System.nanoTime();
         System.out.println("Bubble - " + (t1 - t0) / 1000);
 
-        selectionSort(a, max_size);
+        copyArry(a, t);
+        selectionSort(t, max_size);
         long t2 = System.nanoTime();
         System.out.println("Select - " + (t2 - t1) / 1000);
 
-        insertionSort(a, max_size);
+        copyArry(a, t);
+        insertionSort(t, max_size);
         long t3 = System.nanoTime();
         System.out.println("Insert - " + (t3 - t2) / 1000);
 
-        quickSort(a, 0, max_size - 1);
+        copyArry(a, t);
+        quickSort(t, 0, max_size - 1);
         long t4 = System.nanoTime();
         System.out.println("Quick  - " + (t4 - t3) / 1000);
-
     }
 
     public static void main(String[] args) {
         try {
+            // Get input
+            getInput();
             // Instantiation
             BuildDataSet(max_size);
-
             // Start test
             test();
 
