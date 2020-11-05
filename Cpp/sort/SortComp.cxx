@@ -152,8 +152,9 @@ bool isSorted(int *arr)
 
 void test()
 {
-    cout << "Comparing sort algorithms ..." << endl;
-    cout << "//////////////////////////////////////////////////" << endl;
+    cout << "Comparing sort algorithms (C++) ..." << endl;
+    cout << left << setw(20) << "Algorithm" << setw(20) << "Time elapsed(μ)"
+         << "Is sorted?" << endl;
 
     auto t0 = chrono::high_resolution_clock::now(); //get start time
     copyArry(a, t);
@@ -176,9 +177,9 @@ void test()
     auto t4 = chrono::high_resolution_clock::now(); //get end time
     cout << left << setw(20) << "Quick" << setw(20) << chrono::duration_cast<chrono::microseconds>(t4 - t3).count() << isSorted(t) << endl;
 
-    //auto timeElapsed = chrono::duration_cast<chrono::microseconds>(t4 - t0);
-    cout << endl;
-  
+    auto timeElapsed = chrono::duration_cast<chrono::microseconds>(t4 - t0).count();
+    cout << "_______________________________________________________" << endl;
+    cout << left << setw(20) << "Total time" << setw(20) << timeElapsed << (double)timeElapsed / 1000000 << " seconds" << endl;
 }
 
 int main()
