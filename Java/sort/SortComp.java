@@ -145,7 +145,7 @@ public class SortComp {
         System.out.println("Sorting (Java)...");
 
         // Setting up some alignment format
-        String leftAlignFormat = "%-20s %-20s %-7s%n";
+        String leftAlignFormat = "%-16s %-20s %-6s%n";
         System.out.printf(leftAlignFormat, "Algorithm", "Time elapsed(μ) ", "Is sorted?");
 
         long t0 = System.nanoTime();
@@ -176,7 +176,7 @@ public class SortComp {
         // Print the summary
         long timeElapsed = t4 - t0;
         System.out.println("////////////////////////////////////////////////////////");
-        System.out.printf(leftAlignFormat, "// Total time", timeElapsed / 1000, (double) timeElapsed / 1000000000);
+        System.out.printf(leftAlignFormat, "// Total time", timeElapsed / 1000, ((float) timeElapsed / 1000000000)+" seconds");
         System.out.printf(leftAlignFormat,"// Completed @", new Date(),"");
         System.out.println("////////////////////////////////////////////////////////");
     }
