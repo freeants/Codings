@@ -1,6 +1,7 @@
 package sort;
 
 import java.util.concurrent.ThreadLocalRandom; // standard way to genrate random number in Java 1.7 and above
+import java.util.Date;
 import java.util.Scanner;
 
 public class SortComp {
@@ -143,26 +144,41 @@ public class SortComp {
     static void test() {
         System.out.println("Sorting (Java)...");
 
+        // Setting up some alignment format
+        String leftAlignFormat = "%-20s %-20s %-7s%n";
+        System.out.printf(leftAlignFormat, "Algorithm", "Time elapsed(μ) ", "Is sorted?");
+
         long t0 = System.nanoTime();
         copyArry(a, t);
         bubbleSort(t, max_size);
         long t1 = System.nanoTime();
-        System.out.println("Bubble - " + (t1 - t0) / 1000);
+        // System.out.println("Bubble - " + (t1 - t0) / 1000);
+        System.out.printf(leftAlignFormat, "Bubble", (t1 - t0) / 1000, isSorted(t));
 
         copyArry(a, t);
         selectionSort(t, max_size);
         long t2 = System.nanoTime();
-        System.out.println("Select - " + (t2 - t1) / 1000);
+        // System.out.println("Select - " + (t2 - t1) / 1000);
+        System.out.printf(leftAlignFormat, "Selection", (t2 - t1) / 1000, isSorted(t));
 
         copyArry(a, t);
         insertionSort(t, max_size);
         long t3 = System.nanoTime();
-        System.out.println("Insert - " + (t3 - t2) / 1000);
+        // System.out.println("Insert - " + (t3 - t2) / 1000);
+        System.out.printf(leftAlignFormat, "Insertion", (t3 - t2) / 1000, isSorted(t));
 
         copyArry(a, t);
         quickSort(t, 0, max_size - 1);
         long t4 = System.nanoTime();
-        System.out.println("Quick  - " + (t4 - t3) / 1000);
+        // System.out.println("Quick - " + (t4 - t3) / 1000);
+        System.out.printf(leftAlignFormat, "Quick", (t4 - t3) / 1000, isSorted(t));
+
+        // Print the summary
+        long timeElapsed = t4 - t0;
+        System.out.println("////////////////////////////////////////////////////////");
+        System.out.printf(leftAlignFormat, "// Total time", timeElapsed / 1000, (double) timeElapsed / 1000000000);
+        System.out.printf(leftAlignFormat,"// Completed @", new Date(),"");
+        System.out.println("////////////////////////////////////////////////////////");
     }
 
     public static void main(String[] args) {
