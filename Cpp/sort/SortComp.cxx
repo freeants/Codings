@@ -178,9 +178,11 @@ void test()
     cout << left << setw(20) << "Quick" << setw(20) << chrono::duration_cast<chrono::microseconds>(t4 - t3).count() << isSorted(t) << endl;
 
     auto timeElapsed = chrono::duration_cast<chrono::microseconds>(t4 - t0).count();
-    cout << "///////////////////////////////////////////////////////" << endl;
-    cout << left << setw(20) << "// Total time" << setw(20) << timeElapsed << (double)timeElapsed / 1000000 << " seconds" <<"//"<< endl;
-    cout <<left<<setw(20) <<"// Completed @ " <<setw(20) << system <<" //" << endl;
+    cout << "////////////////////////////////////////////////////////" << endl;
+    cout << left << setw(20) << "// Total time" << setw(20) << timeElapsed << (double)timeElapsed / 1000000 << " seconds"
+         << endl;
+    cout << left << setw(20) << "// Completed @ " << setw(20) << __TIMESTAMP__ << endl;
+    cout << "////////////////////////////////////////////////////////" << endl;
 }
 
 int main()
