@@ -193,5 +193,7 @@ public class SortComp {
         } catch (Exception e) {
             System.out.println("ERROR!");
         }
+        System.gc();
+        System.runFinalization();
     }
 }
