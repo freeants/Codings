@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - E6_RetStorage",
+            "request": "launch",
+            "mainClass": "TIJ4.E6_RetStorage",
+            "projectName": "MyCoding_29ed363d"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - SortComp",
             "request": "launch",
             "mainClass": "sort.SortComp",
