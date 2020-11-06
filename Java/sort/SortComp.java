@@ -176,9 +176,9 @@ public class SortComp {
         // Print the summary
         long timeElapsed = t4 - t0;
         System.out.println("////////////////////////////////////////////////////////");
-        System.out.printf(leftAlignFormat, "// Total time", timeElapsed / 1000, ((float) timeElapsed / 1000000000)+" seconds");
-        System.out.printf(leftAlignFormat,"// Completed @", new Date(),"");
-        System.out.println("////////////////////////////////////////////////////////");
+        System.out.printf(leftAlignFormat, " Total time", timeElapsed / 1000,
+                ((float) timeElapsed / 1000000000) + " seconds");
+        System.out.printf(leftAlignFormat, " Completed @", new Date(), "");
     }
 
     public static void main(String[] args) {

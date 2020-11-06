@@ -74,8 +74,7 @@ int InsertionSearch(int *a, int key, int low, int high)
         if (a[mid] < key)
             return InsertionSearch(a, key, mid + 1, high);
     }
-    else
-        return -1;
+    return -1;
 }
 
 /*
@@ -143,8 +142,8 @@ void BuildDataDictionary()
 
     // Assign values to array
     for (int i = 0; i < MAX; i++)
-        arr[i] = i;            //this forms a sorted serise of [MIN, MAX]
-        //arr[i] = GenKeyNumber(); //this forms randomly filled numbers
+        arr[i] = i; //this forms a sorted serise of [MIN, MAX]
+                    //arr[i] = GenKeyNumber(); //this forms randomly filled numbers
 }
 
 void test()
