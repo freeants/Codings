@@ -1,5 +1,4 @@
 {
-    "python.pythonPath": "/home/ffu/miniconda3/bin/python",
     "files.exclude": {
         "**/.classpath": true,
         "**/.project": true,
@@ -11,5 +10,7 @@
         "chrono": "cpp",
         "iomanip": "cpp"
     },
-    "java.home": "/Library/Java/JavaVirtualMachines/jdk-11.0.9.jdk/Contents/Home"
+    "java.home": "/Library/Java/JavaVirtualMachines/jdk-11.0.9.jdk/Contents/Home",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
 }
