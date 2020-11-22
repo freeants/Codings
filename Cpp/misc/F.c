@@ -67,6 +67,7 @@ int main()
     work();
     /* output to stdout */
     printf("%d %d %d\n", x, y, s);
+    free(arr);
 
     return 0;
 }
