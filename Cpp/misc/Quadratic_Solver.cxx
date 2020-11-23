@@ -13,15 +13,16 @@ int main()
   float coe[3], x1, x2, delta;
 
   // prompt for input a, b & c
-  cout << "Caculate the roots of ax² + bx + c = 0" << endl;
-  cout << endl
-       << "Input the value of a, b and c: ";
+  cout << "Caculate the roots of ax² + bx + c = 0, input a, b and c: ";
 
   for (int i = 0; i < 3; i++)
     cin >> coe[i];
 
   // delta = b² - 4ac
   delta = coe[1] * coe[1] - 4.0 * coe[0] * coe[2];
+  cout << "The function appears to be: "
+       << coe[0] << "x² + " << coe[1] << "x + " << coe[2] << " = 0" << endl;
+  cout << "delta = b² - 4ac = " << delta << endl;
 
   // determin value of delta
   if (delta > 0)
