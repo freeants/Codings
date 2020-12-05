@@ -8,7 +8,8 @@
     "files.associations": {
         "iostream": "cpp",
         "chrono": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "filesystem": "cpp"
     },
     "java.home": "/Library/Java/JavaVirtualMachines/jdk-11.0.9.jdk/Contents/Home",
     "python.linting.pylintEnabled": true,
