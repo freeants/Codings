@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch e1001",
+            "request": "launch",
+            "mainClass": "e1001",
+            "projectName": "Codings_9f096362"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - SortComp",
             "request": "launch",
             "mainClass": "sort.SortComp",
