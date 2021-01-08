@@ -1,6 +1,6 @@
 /*
-  Quadratic_Solver.cxx
-  Caculate the roots of ax² + bx + c = 0
+  File: Quadratic_Solver.cxx - Caculate the roots of ax² + bx + c = 0
+  Copyright:  © 2020-2025 brave_brother. All rights reserved.
  */
 
 #include <iostream>
@@ -13,7 +13,7 @@ int main()
   float coe[3], x1, x2, delta;
 
   // prompt for input a, b & c
-  cout << "Caculate the roots of ax² + bx + c = 0, input a, b and c: ";
+  cout << "Calculate the roots of ax² + bx + c = 0, input a, b and c: ";
 
   for (int i = 0; i < 3; i++)
     cin >> coe[i];
