@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Sort2DArray",
+            "request": "launch",
+            "mainClass": "zhihu.Sort2DArray",
+            "projectName": "Codings_9f096362"
+        },
+        {
+            "type": "java",
+            "name": "Launch Sort2DArray",
+            "request": "launch",
+            "mainClass": "Sort2DArray",
+            "projectName": "Codings_9f096362"
+        },
+        {
+            "type": "java",
             "name": "Launch e1001",
             "request": "launch",
             "mainClass": "e1001",
