@@ -1,5 +1,3 @@
-package zhihu;
-
 /*
     Sort2DArray.java - Find max item of each row, output each and their sum.
     Author: freeants, All rights reserved.
@@ -94,7 +92,7 @@ class Sort2DArray {
     public static void main(String[] args) {
         // Ask for input array size at start
         if (args.length != 2) {
-            System.out.println("Usage: Dec2Bin m n");
+            System.out.println("Usage: Sort2DArray m n");
             return;
         }
         // Input validations
