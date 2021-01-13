@@ -73,7 +73,7 @@ class Sort2DArray {
             for (int c = 0; c < N; c++) {
                 row[c] = a[r][c]; // assign row items to row[] array
             }
-            insertionSort(row, N); // sort reach row array, total M times
+            insertionSort(row, N); // sort each row array, total M times
             System.out.println("Max @ row[" + r + "]: " + row[N - 1]);
             max[r] = row[N - 1]; // save each row max to max[]
         }
