@@ -6,6 +6,41 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch test",
+            "request": "launch",
+            "mainClass": "test",
+            "projectName": "Codings_9f096362"
+        },
+        {
+            "type": "java",
+            "name": "Launch Combo",
+            "request": "launch",
+            "mainClass": "Combo",
+            "projectName": "Codings_9f096362"
+        },
+        {
+            "type": "java",
+            "name": "Launch Stack_Demo",
+            "request": "launch",
+            "mainClass": "Stack_Demo",
+            "projectName": "Codings_9f096362"
+        },
+        {
+            "type": "java",
+            "name": "Launch ComboOfN",
+            "request": "launch",
+            "mainClass": "ComboOfN",
+            "projectName": "Codings_9f096362"
+        },
+        {
+            "type": "java",
+            "name": "Launch ComboOf10",
+            "request": "launch",
+            "mainClass": "ComboOf10",
+            "projectName": "Codings_9f096362"
+        },
+        {
+            "type": "java",
             "name": "Launch Sort2DArray",
             "request": "launch",
             "mainClass": "zhihu.Sort2DArray",
