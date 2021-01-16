@@ -35,7 +35,7 @@ public class ComboOfN {
         Nums = new int[n];
         // assign values to array with random number
         for (int i = 0; i < n; i++)
-            Nums[i] = i + 1;
+            Nums[i] = i ;
         System.out.println(Arrays.toString(Nums));
     }
 
@@ -57,13 +57,6 @@ public class ComboOfN {
             }
         }
     }
-
-    // static int Combo(int m, int n) {
-    // if (n == 0 || n == m)
-    // return 1;
-    // else
-    // return Combo(m - 1, n) + Combo(m - 1, n - 1);
-    // }
 
     /*
      * tests other conditions

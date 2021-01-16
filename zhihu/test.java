@@ -7,7 +7,7 @@ public class test {
 
     public static void main(String[] args) {
         Vector<Integer> v = new Vector<>();
-        for (int i = 1; i <= 10; i++)
+        for (int i = 0; i <= 9; i++)
             v.add(i);
         System.out.print("Input selection number: ");
         Scanner input = new Scanner(System.in);
@@ -17,17 +17,7 @@ public class test {
                 Combination(v, solution, 0, 0) + " solutions in total and " + cnt + " combos meet requirements.");
         input.close();
     }
-
-    // static boolean conditions(int[] solution, int pos) {
-    // int sum = 0;
-    // for (int i = 0; i < pos; i++) {
-    // sum += solution[i];
-    // }
-    // if (sum == 10)
-    // return true;
-    // else
-    // return false;
-    // }
+   
     static void conditions(int[] solution) {
         int sum = 0;
         boolean c = false;
