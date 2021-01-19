@@ -1,8 +1,7 @@
 /*
- * SortComp.cxx - freeants, 2020.
- *  - Compare sort algorithms
- **/
-
+    File: SortComp.cxx - Compare sort algorithms.
+    Copyright:  (c) freeants. All rights reserved.
+ */
 #include <chrono>
 #include <ctime>
 #include <random>
@@ -15,6 +14,9 @@ int max_size; // Size of data dictionary
 int *a; // Data dictionary
 int *t; // Temp data dictionary
 
+/*
+ * The Bubble Sort method.
+ */
 void bubbleSort(int arr[], int n)
 {
     bool swapped = true;
@@ -37,6 +39,9 @@ void bubbleSort(int arr[], int n)
     }
 }
 
+/*
+ * The Quick Sort method.
+ */
 void quickSort(int arr[], int left, int right)
 {
     int i = left, j = right;
@@ -67,6 +72,9 @@ void quickSort(int arr[], int left, int right)
         quickSort(arr, i, right);
 }
 
+/*
+ * The Selection Sort method.
+ */
 void selectionSort(int arr[], int n)
 {
     int i, j, minIndex, tmp;
@@ -85,6 +93,9 @@ void selectionSort(int arr[], int n)
     }
 }
 
+/*
+ * The Insertion Sort method.
+ */
 void insertionSort(int arr[], int length)
 {
     int i, j, tmp;
@@ -102,7 +113,7 @@ void insertionSort(int arr[], int length)
 }
 
 /*
- * GenKeyNumber() - Generate key number randomly.
+ * GenRandomNumber() - Generate number randomly in rang [0, max_size].
  */
 int GenRandomNumber()
 {
@@ -120,6 +131,9 @@ void getInput()
     cin >> max_size;
 }
 
+/*
+ * Build data dictionary and count timing.
+ */
 void BuildDataDictionary()
 {
     cout << "Building data dictionary ... (size: " << max_size << ") - ";
@@ -137,12 +151,18 @@ void BuildDataDictionary()
     cout << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << " micro(μ) seconds" << endl;
 }
 
+/*
+ * Copy array to another.
+ */
 void copyArry(int *x, int *y)
 {
     for (int i = 0; i < max_size; i++)
         y[i] = x[i];
 }
 
+/*
+ * Verify if the array was sorted.
+ */
 bool isSorted(int *arr)
 {
     for (int i = 1; i < max_size; i++)
@@ -151,6 +171,9 @@ bool isSorted(int *arr)
     return true;
 }
 
+/*
+ * Main routine that carries out the tests.
+ */
 void test()
 {
     cout << "Comparing sort algorithms (C++) ..." << endl;
@@ -204,7 +227,7 @@ int main()
         cout << "ERROR!" << endl;
         return -1;
     }
-    delete[] a;
+    delete[] a; // free resources
     delete[] t;
     return 0;
 }
