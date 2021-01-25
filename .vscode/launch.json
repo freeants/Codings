@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch SortComp",
+            "request": "launch",
+            "mainClass": "sort.SortComp",
+            "projectName": "Codings_cfa7158a"
+        },
+        {
+            "type": "java",
+            "name": "Launch HelloDateApp",
+            "request": "launch",
+            "mainClass": "TIJ4.HelloDateApp",
+            "projectName": "Codings_cfa7158a"
+        },
+        {
+            "type": "java",
             "name": "Launch test",
             "request": "launch",
             "mainClass": "test",
