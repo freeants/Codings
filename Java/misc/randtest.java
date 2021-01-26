@@ -8,12 +8,10 @@ public class randtest {
         int Guess;
         int Attempt;
         int MagicNum = ThreadLocalRandom.current().nextInt(0, 101);
-        Scanner reader = new Scanner(System.in);
-
         for (Attempt = 0; Attempt < 7; Attempt++) {
             System.out.printf("%d. What's your guess? ", Attempt); // Ask for input
-            Guess = reader.nextInt(); // Scans the next token of the imput as an int
-            
+            Guess = new Scanner(System.in).nextInt(); // Scans the next token of the imput as an int
+
             if (Guess < 0 || Guess > 100) {
                 System.out.println("Out of range");
                 break;
@@ -28,7 +26,7 @@ public class randtest {
                 break;
             }
         }
-        reader.close();
+        new Scanner(System.in).close();
         if (Attempt >= 7) {
             System.out.println("Yee out of guesses! Better luck next time, yee matey!");
             System.out.println("My secret number was " + MagicNum);
