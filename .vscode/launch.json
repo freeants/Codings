@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch randtest",
+            "request": "launch",
+            "mainClass": "misc.randtest",
+            "projectName": "Codings_9f096362"
+        },
+        {
+            "type": "java",
             "name": "Launch SortComp",
             "request": "launch",
             "mainClass": "sort.SortComp",

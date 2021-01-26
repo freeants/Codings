@@ -11,7 +11,7 @@
         "iomanip": "cpp",
         "filesystem": "cpp"
     },
-    "java.home": "C:\\Program Files\\Java\\jdk-11.0.10",
+    "java.home": "/Library/Java/JavaVirtualMachines/jdk-11.0.10.jdk/Contents/Home",
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
     "java.completion.favoriteStaticMembers": [
@@ -28,6 +28,7 @@
         "org.mockito.Answers.*"
     ],
     "java.completion.filteredTypes": [
+
     
         "java.awt.*",
         "com.sun.*",
