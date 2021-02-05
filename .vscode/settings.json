@@ -33,5 +33,6 @@
         "java.awt.*",
         "com.sun.*",
         "sun.*"
-    ]
+    ],
+    "C_Cpp.errorSquiggles": "Disabled"
 }
