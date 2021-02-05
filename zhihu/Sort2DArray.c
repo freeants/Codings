@@ -75,8 +75,8 @@ int GenRndNum()
 }
 
 /*
-  * Build 2D array with random numbers, to save input time
-  */
+ * Build 2D array with random numbers, to save input time
+ */
 void Build2DArray(int m, int n)
 {
     printf("Build 2D array ... (size: %d*%d)\n", M, N);
