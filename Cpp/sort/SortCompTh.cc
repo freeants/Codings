@@ -1,24 +1,28 @@
 /*
-    File: SortComp.cxx - Compare sort algorithms.
+    File: SortCompTh.cc - Compare sort algorithms, multi-threaded way.
     Copyright:  (c) freeants. All rights reserved.
  */
-#include <chrono>
-#include <ctime>
-#include <random>
+#include <chrono> // for chrono timing
+#include <ctime>  // for time()
+#include <random> // for random device
 #include <iostream>
 #include <iomanip>
+#include <thread> // the c++ thread classes
+
 using namespace std;
 
 int max_size; // Size of data dictionary
 
-int *a; // Data dictionary
-int *t; // Temp data dictionary
+int *a;                          // Data dictionary
+int *d0, *d1, *d2, *d3;          // Temp data dictionary, each for a threaded task
+auto t_th0, t_th1, t_th2, t_th3; // for each thread executing time
 
 /*
  * The Bubble Sort method.
  */
 void bubbleSort(int arr[], int n)
 {
+    auto t0 = chrono::high_resolution_clock::now(); //get start time
     bool swapped = true;
     int j = 0;
     int tmp;
@@ -37,6 +41,54 @@ void bubbleSort(int arr[], int n)
             }
         }
     }
+    auto t1 = chrono::high_resolution_clock::now(); //get end time
+    t_th0 = t1 - t0;                                //get process execution time
+}
+
+/*
+ * The Selection Sort method.
+ */
+void selectionSort(int arr[], int n)
+{
+    auto t0 = chrono::high_resolution_clock::now(); //get start time
+    int i, j, minIndex, tmp;
+    for (i = 0; i < n - 1; i++)
+    {
+        minIndex = i;
+        for (j = i + 1; j < n; j++)
+            if (arr[j] < arr[minIndex])
+                minIndex = j;
+        if (minIndex != i)
+        {
+            tmp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = tmp;
+        }
+    }
+    auto t1 = chrono::high_resolution_clock::now(); //get end time
+    t_th1 = t1 - t0;
+}
+
+/*
+ * The Insertion Sort method.
+ */
+void insertionSort(int arr[], int length)
+{
+    auto t0 = chrono::high_resolution_clock::now(); //get start time
+    int i, j, tmp;
+    for (i = 1; i < length; i++)
+    {
+        j = i;
+        while (j > 0 && arr[j - 1] > arr[j])
+        {
+            tmp = arr[j];
+            arr[j] = arr[j - 1];
+            arr[j - 1] = tmp;
+            j--;
+        }
+    }
+    auto t1 = chrono::high_resolution_clock::now(); //get end time
+    t_th2 = t1 - t0;
 }
 
 /*
@@ -44,6 +96,7 @@ void bubbleSort(int arr[], int n)
  */
 void quickSort(int arr[], int left, int right)
 {
+    auto t0 = chrono::high_resolution_clock::now(); //get start time
     int i = left, j = right;
     int tmp;
     int pivot = arr[(left + right) / 2];
@@ -70,46 +123,8 @@ void quickSort(int arr[], int left, int right)
         quickSort(arr, left, j);
     if (i < right)
         quickSort(arr, i, right);
-}
-
-/*
- * The Selection Sort method.
- */
-void selectionSort(int arr[], int n)
-{
-    int i, j, minIndex, tmp;
-    for (i = 0; i < n - 1; i++)
-    {
-        minIndex = i;
-        for (j = i + 1; j < n; j++)
-            if (arr[j] < arr[minIndex])
-                minIndex = j;
-        if (minIndex != i)
-        {
-            tmp = arr[i];
-            arr[i] = arr[minIndex];
-            arr[minIndex] = tmp;
-        }
-    }
-}
-
-/*
- * The Insertion Sort method.
- */
-void insertionSort(int arr[], int length)
-{
-    int i, j, tmp;
-    for (i = 1; i < length; i++)
-    {
-        j = i;
-        while (j > 0 && arr[j - 1] > arr[j])
-        {
-            tmp = arr[j];
-            arr[j] = arr[j - 1];
-            arr[j - 1] = tmp;
-            j--;
-        }
-    }
+    auto t1 = chrono::high_resolution_clock::now(); //get end time
+    t_th3 = t1 - t0;                                // return process execution time
 }
 
 /*
@@ -141,7 +156,10 @@ void BuildDataDictionary()
     auto t0 = chrono::high_resolution_clock::now(); //get start time
     // Define the array that holds all data
     a = new int[max_size];
-    t = new int[max_size];
+    d0 = new int[max_size];
+    d1 = new int[max_size];
+    d2 = new int[max_size];
+    d3 = new int[max_size];
 
     // Assign values to array
     for (int i = 0; i < max_size; i++)
@@ -172,36 +190,38 @@ bool isSorted(int *arr)
 }
 
 /*
- * Main routine that carries out the tests.
+ * Main routine that carries out the tests - multi threaded.
  */
 void test()
 {
-    cout << "Comparing sort algorithms (C++) ..." << endl;
+    cout << "Comparing sort algorithms (C++, threaded) ..." << endl;
     cout << left << setw(20) << "Algorithm" << setw(20) << "Time elapsed(μ)"
-         << "Is sorted?" << endl;
+         << "Is sorted? "
+         << " Thread ID" << endl;
 
-    auto t0 = chrono::high_resolution_clock::now(); //get start time
-    copyArry(a, t);
-    bubbleSort(t, max_size);
-    auto t1 = chrono::high_resolution_clock::now(); //get end time
-    cout << left << setw(20) << "Bubble" << setw(20) << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << isSorted(t) << endl;
+    /** th0 for bubble sort */
 
-    copyArry(a, t);
-    selectionSort(t, max_size);
-    auto t2 = chrono::high_resolution_clock::now(); //get end time
-    cout << left << setw(20) << "Selection" << setw(20) << chrono::duration_cast<chrono::microseconds>(t2 - t1).count() << isSorted(t) << endl;
+    copyArry(a, d0);
+    thread th0(bubbleSort, d0, max_size); // create th0 and get it started
+    th0.detach();                         //none blocking way
+    cout << left << setw(20) << "Bubble" << setw(20) << chrono::duration_cast<chrono::microseconds>(t_th0).count() << isSorted(d0) << th0.get_id() << endl;
 
-    copyArry(a, t);
-    insertionSort(t, max_size);
-    auto t3 = chrono::high_resolution_clock::now(); //get end time
-    cout << left << setw(20) << "Insertion" << setw(20) << chrono::duration_cast<chrono::microseconds>(t3 - t2).count() << isSorted(t) << endl;
+    copyArry(a, d1);
+    thread th1(selectionSort, d1, max_size);
+    th1.detach();
+    cout << left << setw(20) << "Selection" << setw(20) << chrono::duration_cast<chrono::microseconds>(t_th1).count() << isSorted(d1) << th1.get_id() << endl;
 
-    copyArry(a, t);
-    quickSort(t, 0, max_size - 1);
-    auto t4 = chrono::high_resolution_clock::now(); //get end time
-    cout << left << setw(20) << "Quick" << setw(20) << chrono::duration_cast<chrono::microseconds>(t4 - t3).count() << isSorted(t) << endl;
+    copyArry(a, d2);
+    thread th2(insertionSort, d2, max_size);
+    th2.detach();
+    cout << left << setw(20) << "Insertion" << setw(20) << chrono::duration_cast<chrono::microseconds>(t_th2).count() << isSorted(d2) << endl;
 
-    auto timeElapsed = chrono::duration_cast<chrono::microseconds>(t4 - t0).count();
+    copyArry(a, d3);
+    thread th3(quickSort, 0, max_size);
+    th3.detach();
+    cout << left << setw(20) << "Quick" << setw(20) << chrono::duration_cast<chrono::microseconds>(t_th3).count() << isSorted(d3) << endl;
+
+    auto timeElapsed = chrono::duration_cast<chrono::microseconds>(t_th0 + t_th1 + t_th2 + t_th3).count();
     auto timenow = chrono::system_clock::to_time_t(chrono::system_clock::now());
     cout << "////////////////////////////////////////////////////////" << endl;
     cout << left << setw(20) << " Total time" << setw(20) << timeElapsed << (double)timeElapsed / 1000000 << " seconds"
@@ -227,7 +247,11 @@ int main()
         cout << "ERROR!" << endl;
         return -1;
     }
-    delete[] a; // free resources
-    delete[] t;
+
+    delete[] a;
+    delete[] d0;
+    delete[] d1;
+    delete[] d2;
+    delete[] d3;
     return 0;
 }
