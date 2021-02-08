@@ -12,7 +12,7 @@
         "filesystem": "cpp",
         "thread": "cpp"
     },
-    "java.home": "/Library/Java/JavaVirtualMachines/jdk-11.0.10.jdk/Contents/Home",
+    "java.home": "/usr/lib/jvm/default-java",
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
     "java.completion.favoriteStaticMembers": [
@@ -35,5 +35,12 @@
         "com.sun.*",
         "sun.*"
     ],
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "java.import.exclusions": [
+
+        "**/node_modules/**",
+        "**/.metadata/**",
+        "**/archetype-resources/**",
+        "**/META-INF/maven/**"
+    ]
 }
