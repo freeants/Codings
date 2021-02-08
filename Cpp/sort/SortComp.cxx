@@ -183,23 +183,23 @@ void test()
     auto t0 = chrono::high_resolution_clock::now(); //get start time
     copyArry(a, t);
     bubbleSort(t, max_size);
-    auto t1 = chrono::high_resolution_clock::now(); //get end time
-    cout << left << setw(20) << "Bubble" << setw(20) << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << isSorted(t) << endl;
+    //auto t1 = chrono::high_resolution_clock::now(); //get end time
+    //cout << left << setw(20) << "Bubble" << setw(20) << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << isSorted(t) << endl;
 
     copyArry(a, t);
     selectionSort(t, max_size);
-    auto t2 = chrono::high_resolution_clock::now(); //get end time
-    cout << left << setw(20) << "Selection" << setw(20) << chrono::duration_cast<chrono::microseconds>(t2 - t1).count() << isSorted(t) << endl;
+    //auto t2 = chrono::high_resolution_clock::now(); //get end time
+    //cout << left << setw(20) << "Selection" << setw(20) << chrono::duration_cast<chrono::microseconds>(t2 - t1).count() << isSorted(t) << endl;
 
     copyArry(a, t);
     insertionSort(t, max_size);
-    auto t3 = chrono::high_resolution_clock::now(); //get end time
-    cout << left << setw(20) << "Insertion" << setw(20) << chrono::duration_cast<chrono::microseconds>(t3 - t2).count() << isSorted(t) << endl;
+    //auto t3 = chrono::high_resolution_clock::now(); //get end time
+    //cout << left << setw(20) << "Insertion" << setw(20) << chrono::duration_cast<chrono::microseconds>(t3 - t2).count() << isSorted(t) << endl;
 
     copyArry(a, t);
     quickSort(t, 0, max_size - 1);
     auto t4 = chrono::high_resolution_clock::now(); //get end time
-    cout << left << setw(20) << "Quick" << setw(20) << chrono::duration_cast<chrono::microseconds>(t4 - t3).count() << isSorted(t) << endl;
+    //cout << left << setw(20) << "Quick" << setw(20) << chrono::duration_cast<chrono::microseconds>(t4 - t3).count() << isSorted(t) << endl;
 
     auto timeElapsed = chrono::duration_cast<chrono::microseconds>(t4 - t0).count();
     auto timenow = chrono::system_clock::to_time_t(chrono::system_clock::now());

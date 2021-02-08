@@ -13,16 +13,16 @@ using namespace std;
 
 int max_size; // Size of data dictionary
 
-int *a;                          // Data dictionary
-int *d0, *d1, *d2, *d3;          // Temp data dictionary, each for a threaded task
-auto t_th0, t_th1, t_th2, t_th3; // for each thread executing time
+int *a;                 // Data dictionary
+int *d0, *d1, *d2, *d3; // Temp data dictionary, each for a threaded task
+//auto t_th0, t_th1, t_th2, t_th3; // for each thread executing time
 
 /*
  * The Bubble Sort method.
  */
 void bubbleSort(int arr[], int n)
 {
-    auto t0 = chrono::high_resolution_clock::now(); //get start time
+    //auto t0 = chrono::high_resolution_clock::now(); //get start time
     bool swapped = true;
     int j = 0;
     int tmp;
@@ -41,8 +41,8 @@ void bubbleSort(int arr[], int n)
             }
         }
     }
-    auto t1 = chrono::high_resolution_clock::now(); //get end time
-    t_th0 = t1 - t0;                                //get process execution time
+    //auto t1 = chrono::high_resolution_clock::now(); //get end time
+    //t_th0 = t1 - t0;                                //get process execution time
 }
 
 /*
@@ -50,7 +50,7 @@ void bubbleSort(int arr[], int n)
  */
 void selectionSort(int arr[], int n)
 {
-    auto t0 = chrono::high_resolution_clock::now(); //get start time
+    //auto t0 = chrono::high_resolution_clock::now(); //get start time
     int i, j, minIndex, tmp;
     for (i = 0; i < n - 1; i++)
     {
@@ -65,8 +65,8 @@ void selectionSort(int arr[], int n)
             arr[minIndex] = tmp;
         }
     }
-    auto t1 = chrono::high_resolution_clock::now(); //get end time
-    t_th1 = t1 - t0;
+    //auto t1 = chrono::high_resolution_clock::now(); //get end time
+    //t_th1 = t1 - t0;
 }
 
 /*
@@ -74,7 +74,7 @@ void selectionSort(int arr[], int n)
  */
 void insertionSort(int arr[], int length)
 {
-    auto t0 = chrono::high_resolution_clock::now(); //get start time
+    //auto t0 = chrono::high_resolution_clock::now(); //get start time
     int i, j, tmp;
     for (i = 1; i < length; i++)
     {
@@ -87,8 +87,8 @@ void insertionSort(int arr[], int length)
             j--;
         }
     }
-    auto t1 = chrono::high_resolution_clock::now(); //get end time
-    t_th2 = t1 - t0;
+    //auto t1 = chrono::high_resolution_clock::now(); //get end time
+    //t_th2 = t1 - t0;
 }
 
 /*
@@ -96,7 +96,7 @@ void insertionSort(int arr[], int length)
  */
 void quickSort(int arr[], int left, int right)
 {
-    auto t0 = chrono::high_resolution_clock::now(); //get start time
+    //auto t0 = chrono::high_resolution_clock::now(); //get start time
     int i = left, j = right;
     int tmp;
     int pivot = arr[(left + right) / 2];
@@ -123,8 +123,8 @@ void quickSort(int arr[], int left, int right)
         quickSort(arr, left, j);
     if (i < right)
         quickSort(arr, i, right);
-    auto t1 = chrono::high_resolution_clock::now(); //get end time
-    t_th3 = t1 - t0;                                // return process execution time
+    //auto t1 = chrono::high_resolution_clock::now(); //get end time
+    //t_th3 = t1 - t0;                                // return process execution time
 }
 
 /*
@@ -196,32 +196,37 @@ void test()
 {
     cout << "Comparing sort algorithms (C++, threaded) ..." << endl;
     cout << left << setw(20) << "Algorithm" << setw(20) << "Time elapsed(μ)"
-         << "Is sorted? "
-         << " Thread ID" << endl;
+         << setw(20) << "Is sorted? " << setw(20) << "Thread ID" << endl;
 
-    /** th0 for bubble sort */
+    /** start the array copy thread */
+    thread cp_t0(copyArry, a, d0);
+    thread cp_t1(copyArry, a, d1);
+    thread cp_t2(copyArry, a, d2);
+    thread cp_t3(copyArry, a, d3);
+    cp_t0.join();
+    cp_t1.join();
+    cp_t2.join();
+    cp_t3.join();
 
-    copyArry(a, d0);
-    thread th0(bubbleSort, d0, max_size); // create th0 and get it started
-    th0.detach();                         //none blocking way
-    cout << left << setw(20) << "Bubble" << setw(20) << chrono::duration_cast<chrono::microseconds>(t_th0).count() << isSorted(d0) << th0.get_id() << endl;
+    /** start the array sort threads */
+    auto t0 = chrono::high_resolution_clock::now(); //get start time
+    thread st_t0(bubbleSort, d0, max_size);
+    thread st_t1(selectionSort, d1, max_size);
+    thread st_t2(insertionSort, d2, max_size);
+    thread st_t3(quickSort, d3, 0, max_size);
+    st_t0.join();
+    st_t1.join();
+    st_t2.join();
+    st_t3.join();
+    auto t = chrono::high_resolution_clock::now(); //get end time
 
-    copyArry(a, d1);
-    thread th1(selectionSort, d1, max_size);
-    th1.detach();
-    cout << left << setw(20) << "Selection" << setw(20) << chrono::duration_cast<chrono::microseconds>(t_th1).count() << isSorted(d1) << th1.get_id() << endl;
+    /** print results */
+    //cout << left << setw(20) << "Bubble" << setw(20) << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << setw(20) << isSorted(d0) << setw(20) << st_t0.get_id() << endl;
+    //cout << left << setw(20) << "Selection" << setw(20) << chrono::duration_cast<chrono::microseconds>(t3 - t2).count() << setw(20) << isSorted(d1) << setw(20) << st_t1.get_id() << endl;
+    //cout << left << setw(20) << "Insertion" << setw(20) << chrono::duration_cast<chrono::microseconds>(t5 - t4).count() << setw(20) << isSorted(d2) << setw(20) << st_t2.get_id() << endl;
+    //cout << left << setw(20) << "Quick" << setw(20) << chrono::duration_cast<chrono::microseconds>(t7 - t6).count() << setw(20) << isSorted(d3) << setw(20) << st_t3.get_id() << endl;
 
-    copyArry(a, d2);
-    thread th2(insertionSort, d2, max_size);
-    th2.detach();
-    cout << left << setw(20) << "Insertion" << setw(20) << chrono::duration_cast<chrono::microseconds>(t_th2).count() << isSorted(d2) << endl;
-
-    copyArry(a, d3);
-    thread th3(quickSort, 0, max_size);
-    th3.detach();
-    cout << left << setw(20) << "Quick" << setw(20) << chrono::duration_cast<chrono::microseconds>(t_th3).count() << isSorted(d3) << endl;
-
-    auto timeElapsed = chrono::duration_cast<chrono::microseconds>(t_th0 + t_th1 + t_th2 + t_th3).count();
+    auto timeElapsed = chrono::duration_cast<chrono::microseconds>(t - t0).count();
     auto timenow = chrono::system_clock::to_time_t(chrono::system_clock::now());
     cout << "////////////////////////////////////////////////////////" << endl;
     cout << left << setw(20) << " Total time" << setw(20) << timeElapsed << (double)timeElapsed / 1000000 << " seconds"
@@ -231,8 +236,9 @@ void test()
 
 int main()
 {
-    try
-    {
+
+    //try
+    //{
         // Get input
         getInput();
 
@@ -241,12 +247,11 @@ int main()
 
         // Start test
         test();
-    }
-    catch (...)
-    {
-        cout << "ERROR!" << endl;
-        return -1;
-    }
+    //}
+    //catch (const std::exception &e)
+    //{
+    //    std::cerr << e.what() << '\n';
+    //}
 
     delete[] a;
     delete[] d0;

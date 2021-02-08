@@ -9,7 +9,8 @@
         "iostream": "cpp",
         "chrono": "cpp",
         "iomanip": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "thread": "cpp"
     },
     "java.home": "/Library/Java/JavaVirtualMachines/jdk-11.0.10.jdk/Contents/Home",
     "python.linting.pylintEnabled": true,
