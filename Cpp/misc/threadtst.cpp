@@ -51,6 +51,9 @@ void func3()
 
 int main(int argc, char const *argv[])
 {
+    unsigned int c = thread::hardware_concurrency();
+    cout <<"Hardware Hyper-Threading capability: " << c << endl;
+    
     /* none threaded code execution */
     auto t0 = chrono::high_resolution_clock::now(); //get start time
     func1();
@@ -60,7 +63,6 @@ int main(int argc, char const *argv[])
     cout << "Sequential execution time: " << chrono::duration<double, milli>(t1 - t0).count() << " ms" << endl;
 
     /* threaded code execution */
-    auto t2 = chrono::high_resolution_clock::now(); //get start time
     thread th1(func1);
     thread th2(func2);
     thread th3(func3);
@@ -68,7 +70,7 @@ int main(int argc, char const *argv[])
     th2.join();
     th3.join();
     auto t3 = chrono::high_resolution_clock::now(); //get end time
-    cout << "Threaded execution time: " << chrono::duration<double, milli>(t3 - t2).count() << " ms" << endl;
+    cout << "Threaded execution time: " << chrono::duration<double, milli>(t3 - t1).count() << " ms" << endl;
 
     return 0;
 }

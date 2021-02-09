@@ -221,11 +221,6 @@ void test()
     auto t = chrono::high_resolution_clock::now(); //get end time
 
     /** print results */
-    //cout << left << setw(20) << "Bubble" << setw(20) << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << setw(20) << isSorted(d0) << setw(20) << st_t0.get_id() << endl;
-    //cout << left << setw(20) << "Selection" << setw(20) << chrono::duration_cast<chrono::microseconds>(t3 - t2).count() << setw(20) << isSorted(d1) << setw(20) << st_t1.get_id() << endl;
-    //cout << left << setw(20) << "Insertion" << setw(20) << chrono::duration_cast<chrono::microseconds>(t5 - t4).count() << setw(20) << isSorted(d2) << setw(20) << st_t2.get_id() << endl;
-    //cout << left << setw(20) << "Quick" << setw(20) << chrono::duration_cast<chrono::microseconds>(t7 - t6).count() << setw(20) << isSorted(d3) << setw(20) << st_t3.get_id() << endl;
-
     auto timeElapsed = chrono::duration_cast<chrono::microseconds>(t - t0).count();
     auto timenow = chrono::system_clock::to_time_t(chrono::system_clock::now());
     cout << "////////////////////////////////////////////////////////" << endl;
@@ -237,8 +232,8 @@ void test()
 int main()
 {
 
-    //try
-    //{
+    try
+    {
         // Get input
         getInput();
 
@@ -247,11 +242,11 @@ int main()
 
         // Start test
         test();
-    //}
-    //catch (const std::exception &e)
-    //{
-    //    std::cerr << e.what() << '\n';
-    //}
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 
     delete[] a;
     delete[] d0;
