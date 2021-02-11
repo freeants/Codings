@@ -214,7 +214,7 @@ void merge(int *arr, int low, int mid, int high)
         arr[i] = temp[k];
     delete[] temp;
 }
-void mergeSort(int arr[], int low, int high)
+void mergeSort(int *arr, int low, int high)
 {
     if (low >= high)
     {
