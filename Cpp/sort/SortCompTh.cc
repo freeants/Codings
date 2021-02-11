@@ -329,7 +329,7 @@ void test()
          << setw(20) << "Is sorted? " << setw(20) << "Thread ID" << endl;
 
     /** start the array copy thread */
-    //thread cp_t0(copyArry, a, d0);
+    thread cp_t0(copyArry, a, d0);
     thread cp_t1(copyArry, a, d1);
     thread cp_t2(copyArry, a, d2);
     thread cp_t3(copyArry, a, d3);
@@ -337,7 +337,7 @@ void test()
     thread cp_t5(copyArry, a, d5);
     thread cp_t6(copyArry, a, d6);
     thread cp_t7(copyArry, a, d7);
-    //cp_t0.join();
+    cp_t0.join();
     cp_t1.join();
     cp_t2.join();
     cp_t3.join();
