@@ -19,6 +19,24 @@ int max_size; // Size of data dictionary
 int *a;                                     // Data dictionary
 int *d0, *d1, *d2, *d3, *d4, *d5, *d6, *d7; // Temp data dictionary
 
+/*
+ * Verify if the array was sorted.
+ */
+bool isSorted(int *arr)
+{
+    for (int i = 1; i < max_size; i++)
+        if (arr[i] < arr[i - 1])
+            return false;
+    return true;
+}
+
+//void dispResult(string str, auto diffTime, int *arr)
+//above is okay for g++, for clang, no auto parameter allowed.
+static auto dispResult =[](string str, auto diffTime, int *arr)
+{
+    cout << left << setw(20) << str << setw(20) << chrono::duration_cast<chrono::microseconds>(diffTime).count() << isSorted(arr) << endl;
+};
+
 /* 1.
  * bubbleSort() - Comparision Sort algorithm, exchange sorting
  * O(n²), O(1), Stable
@@ -277,22 +295,6 @@ void copyArry(int *x, int *y)
 }
 
 /*
- * Verify if the array was sorted.
- */
-bool isSorted(int *arr)
-{
-    for (int i = 1; i < max_size; i++)
-        if (arr[i] < arr[i - 1])
-            return false;
-    return true;
-}
-
-void dispResult(string str, auto diffTime, int *arr)
-{
-    cout << left << setw(20) << str << setw(20) << chrono::duration_cast<chrono::microseconds>(diffTime).count() << isSorted(arr) << endl;
-}
-
-/*
  * Build data dictionary and count timing.
  */
 void BuildDataDictionary()
@@ -356,15 +358,23 @@ void test()
     thread st_t5(heapSort, d5, max_size);
     thread st_t6(mergeSort, d6, 0, max_size);
     thread st_t7(bucketSort, d7, max_size, max_size + 1);
-    st_t0.join();
-    st_t1.join();
-    st_t2.join();
-    st_t3.join();
-    st_t4.join();
-    st_t5.join();
-    st_t6.join();
-    st_t7.join();
-
+    st_t0.join();   auto t1 = chrono::high_resolution_clock::now(); //get start time
+    dispResult("1.Bubble", t1 - t0, d0);
+    st_t1.join();   auto t2 = chrono::high_resolution_clock::now(); //get start time
+    dispResult("2.Quick", t2 - t1, d1);
+    st_t2.join();   auto t3 = chrono::high_resolution_clock::now(); //get start time
+    dispResult("3.Insertion", t3 - t2, d2);
+    st_t3.join();   auto t4 = chrono::high_resolution_clock::now(); //get start time
+    dispResult("4.Shell", t4 - t3, d3);
+    st_t4.join();   auto t5 = chrono::high_resolution_clock::now(); //get start time
+    dispResult("5.Selection", t5 - t4, d4);
+    st_t5.join();   auto t6 = chrono::high_resolution_clock::now(); //get start time
+    dispResult("6.Heap", t6 - t5, d5);
+    st_t6.join();   auto t7 = chrono::high_resolution_clock::now(); //get start time
+    dispResult("7.Merge", t7 - t6, d6);
+    st_t7.join();   auto t8 = chrono::high_resolution_clock::now(); //get start time
+    dispResult("8.Bucket", t8 - t7, d7);
+    
     auto t = chrono::high_resolution_clock::now(); //get end time
 
     /** print results */

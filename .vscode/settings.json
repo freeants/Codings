@@ -10,7 +10,8 @@
         "chrono": "cpp",
         "iomanip": "cpp",
         "filesystem": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "ios": "cpp"
     },
     "java.home": "/usr/lib/jvm/default-java",
     "python.linting.pylintEnabled": true,

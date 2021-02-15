@@ -18,6 +18,24 @@ int max_size; // Size of data dictionary
 int *a; // Data dictionary
 int *t; // Temp data dictionary
 
+/*
+ * Verify if the array was sorted.
+ */
+bool isSorted(int *arr)
+{
+    for (int i = 1; i < max_size; i++)
+        if (arr[i] < arr[i - 1])
+            return false;
+    return true;
+}
+
+//void dispResult(string str, auto diffTime, int *arr)
+//above is okay for g++, for clang, no auto parameter allowed.
+static auto dispResult =[](string str, auto diffTime, int *arr)
+{
+    cout << left << setw(20) << str << setw(20) << chrono::duration_cast<chrono::microseconds>(diffTime).count() << isSorted(arr) << endl;
+};
+
 /* 1.
  * bubbleSort() - Comparision Sort algorithm, exchange sorting
  * O(n²), O(1), Stable
@@ -296,22 +314,6 @@ void copyArry(int *x, int *y)
 {
     for (int i = 0; i < max_size; i++)
         y[i] = x[i];
-}
-
-/*
- * Verify if the array was sorted.
- */
-bool isSorted(int *arr)
-{
-    for (int i = 1; i < max_size; i++)
-        if (arr[i] < arr[i - 1])
-            return false;
-    return true;
-}
-
-void dispResult(string str, auto diffTime, int *arr)
-{
-    cout << left << setw(20) << str << setw(20) << chrono::duration_cast<chrono::microseconds>(diffTime).count() << isSorted(arr) << endl;
 }
 
 /*
