@@ -13,10 +13,11 @@
         "thread": "cpp",
         "ios": "cpp"
     },
-    "java.home": "/usr/lib/jvm/default-java",
+    "java.home": "/Library/Java/JavaVirtualMachines/jdk-11.0.10.jdk/Contents/Home",
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
     "java.completion.favoriteStaticMembers": [
+
 
 
         "org.junit.Assert.*",
@@ -31,6 +32,7 @@
     ],
     "java.completion.filteredTypes": [
 
+
     
         "java.awt.*",
         "com.sun.*",
@@ -43,5 +45,12 @@
         "**/.metadata/**",
         "**/archetype-resources/**",
         "**/META-INF/maven/**"
+    ],
+    "java.completion.importOrder": [
+    
+        "java",
+        "javax",
+        "com",
+        "org"
     ]
 }
