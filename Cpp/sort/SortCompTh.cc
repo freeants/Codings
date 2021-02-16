@@ -31,7 +31,7 @@ bool isSorted(int *arr)
 }
 
 //void dispResult(string str, auto diffTime, int *arr)
-//above is okay for g++, for clang, no auto parameter allowed.
+//above is okay for g++, for clang, no auto param allowed.
 static auto dispResult =[](string str, auto diffTime, int *arr)
 {
     cout << left << setw(20) << str << setw(20) << chrono::duration_cast<chrono::microseconds>(diffTime).count() << isSorted(arr) << endl;

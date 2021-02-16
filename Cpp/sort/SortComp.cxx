@@ -30,7 +30,7 @@ bool isSorted(int *arr)
 }
 
 //void dispResult(string str, auto diffTime, int *arr)
-//above is okay for g++, for clang, no auto parameter allowed.
+//above is okay for g++, for clang, no auto param allowed.
 static auto dispResult =[](string str, auto diffTime, int *arr)
 {
     cout << left << setw(20) << str << setw(20) << chrono::duration_cast<chrono::microseconds>(diffTime).count() << isSorted(arr) << endl;
@@ -253,14 +253,14 @@ void bucketSort(int *arr, int n, int max)
     int i, j;
     int buckets[max];
 
-    // 将buckets中的所有数据都初始化为0。
+    // Initiate all values to 0 in buckets
     memset(buckets, 0, max * sizeof(int));
 
-    // 1. 计数
+    // 1. counting
     for (i = 0; i < n; i++)
         buckets[arr[i]]++;
 
-    // 2. 排序
+    // 2. sorting
     for (i = 0, j = 0; i < max; i++)
     {
         while ((buckets[i]--) > 0)
