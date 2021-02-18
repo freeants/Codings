@@ -315,7 +315,7 @@ public class SortCompTh {
     static void test() throws InterruptedException {
         System.out.println("Sorting (Java)...");
         // Setting up some alignment format
-        //String leftAlignFormat = "%-16s %-20s %-6s%n";
+        // String leftAlignFormat = "%-16s %-20s %-6s%n";
         System.out.printf(leftAlignFormat, "Algorithm", "Time elapsed(μ) ", "Is sorted?");
 
         /** start the array copy thread */
@@ -337,7 +337,7 @@ public class SortCompTh {
         cp_t7.start();
 
         /** start the array sort threads */
-        // long t0 = System.nanoTime();
+        long t0 = System.nanoTime();
         Thread st_t0 = new Thread(() -> bubbleSort(d0, max_size));
         Thread st_t1 = new Thread(() -> quickSort(d1, 0, max_size - 1));
         Thread st_t2 = new Thread(() -> insertionSort(d2, max_size));
@@ -346,23 +346,30 @@ public class SortCompTh {
         Thread st_t5 = new Thread(() -> heapSort(d5, max_size));
         Thread st_t6 = new Thread(() -> mergeSort(d6, 0, max_size - 1));
         Thread st_t7 = new Thread(() -> bucketSort(d7, max_size, max_size + 1));
-        st_t0.start();
-        st_t1.start();
-        st_t2.start();
-        st_t3.start();
-        st_t4.start();
-        st_t5.start();
-        st_t6.start();
-        st_t7.start();
-
-        // long t8 = System.nanoTime();
+        //st_t0.join();
+        st_t0.join(0); long t1= System.nanoTime();
+        System.out.printf(leftAlignFormat, "1.Bubble", (t1 - t0) / 1000, isSorted(d0));
+        st_t1.join(0); long t2= System.nanoTime();
+        System.out.printf(leftAlignFormat, "2.Quick", (t2 - t1) / 1000, isSorted(d1));
+        st_t2.join(0); long t3= System.nanoTime();
+        System.out.printf(leftAlignFormat, "3.Insertion", (t3 - t2) / 1000, isSorted(d2));
+        st_t3.join(0); long t4= System.nanoTime();
+        System.out.printf(leftAlignFormat, "4.Shell", (t4 - t3) / 1000, isSorted(d3));
+        st_t4.join(0); long t5= System.nanoTime();
+        System.out.printf(leftAlignFormat, "5.Selection", (t5 - t4) / 1000, isSorted(d4));
+        st_t5.join(0); long t6= System.nanoTime();
+        System.out.printf(leftAlignFormat, "6.Heap", (t6 - t5) / 1000, isSorted(d5));
+        st_t6.join(0); long t7= System.nanoTime();
+        System.out.printf(leftAlignFormat, "7.Merge", (t7 - t6) / 1000, isSorted(d6));
+        st_t7.join(0); long t8= System.nanoTime();
+        System.out.printf(leftAlignFormat, "8.Bucket", (t8 - t7) / 1000, isSorted(d7));
 
         // Print the summary
-        // long timeElapsed = t8 - t0;
-        // System.out.println("////////////////////////////////////////////////////////");
-        // System.out.printf(leftAlignFormat, " Total time", timeElapsed / 1000,
-        // ((float) timeElapsed / 1000000000) + " seconds");
-        // System.out.printf(leftAlignFormat, " Completed @", new Date(), "");
+        long timeElapsed = t8 - t0;
+        System.out.println("////////////////////////////////////////////////////////");
+        System.out.printf(leftAlignFormat, " Total time", timeElapsed / 1000,
+        ((float) timeElapsed / 1000000000) + " seconds");
+        System.out.printf(leftAlignFormat, " Completed @", new Date(), "");
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -372,15 +379,7 @@ public class SortCompTh {
             // Instantiation
             BuildDataSet(max_size);
             // Start test
-            long t0 = System.nanoTime();
             test();
-            long t8 = System.nanoTime();
-            long timeElapsed = t8 - t0;
-            System.out.println("////////////////////////////////////////////////////////");
-            System.out.printf(leftAlignFormat, " Total time", timeElapsed / 1000,
-                    ((float) timeElapsed / 1000000000) + " seconds");
-            System.out.printf(leftAlignFormat, " Completed @", new Date(), "");
-
         } catch (Exception e) {
             System.out.println("ERROR!");
         }
