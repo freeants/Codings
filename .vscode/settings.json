@@ -11,7 +11,8 @@
         "iomanip": "cpp",
         "filesystem": "cpp",
         "thread": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "cctype": "cpp"
     },
     "java.home": "/Library/Java/JavaVirtualMachines/jdk-11.0.10.jdk/Contents/Home",
     "python.linting.pylintEnabled": true,

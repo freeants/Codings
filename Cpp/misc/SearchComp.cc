@@ -6,6 +6,9 @@
 #include <cstring>
 #include <iostream>
 #include <random>
+#include <cctype>
+#include <iomanip>
+#include <chrono>
 using namespace std;
 
 const int max_size = 200; // Size of Fibonacci array
@@ -14,23 +17,10 @@ const int MIN = 0;
 
 int *arr; // Gloable data dictionary
 int key;  // The key number to be searched for
-int Ci;   // Compare times when element i is found
 
-clock_t t0, t1, t2, t3, t4; // Time
-
-/*
- * Fibonacci(int *) - construct a Fibonacci array
- */
-void Fibonacci(int *F)
-{
-    F[0] = 0;
-    F[1] = 1;
-    for (int i = 2; i < max_size; ++i)
-        F[i] = F[i - 1] + F[i - 2];
-}
-
-/*
- * SequenceSearch(int *, int key, int n)
+/* 1.
+ * SequenceSearch - linear search
+ * Average Search Length (ASL) = (n+1) / 2, O(n).
  */
 int SequenceSearch(int *a, int key, int n)
 {
@@ -40,8 +30,9 @@ int SequenceSearch(int *a, int key, int n)
     return -1;
 }
 
-/*
- * BinarySearch(int *, int key, int n)
+/* 2.
+ * BinarySearch - Ordered search
+ * ASL = log2(n+1), O(log2n)
  */
 int BinarySearch(int *a, int key, int n)
 {
@@ -51,16 +42,17 @@ int BinarySearch(int *a, int key, int n)
         mid = (low + high) / 2;
         if (a[mid] == key)
             return mid;
-        else if (a[mid] > key)
+        if (a[mid] > key)
             high = mid - 1;
-        else if (a[mid] < key)
+        if (a[mid] < key)
             low = mid + 1;
     }
     return -1;
 }
 
-/*
- * InsertionSearch(int *, int key, int low, int high)
+/* 3.
+ * InsertionSearch - improved binary search
+ * O(log2(log2n))
  */
 int InsertionSearch(int *a, int key, int low, int high)
 {
@@ -78,9 +70,21 @@ int InsertionSearch(int *a, int key, int low, int high)
 }
 
 /*
- * FibonacciSearch(int *, int n, int key)
+ * Fibonacci(int *) - construct a Fibonacci array
  */
-int FibonacciSearch(int *a, int n, int key)
+void Fibonacci(int *F)
+{
+    F[0] = 0;
+    F[1] = 1;
+    for (int i = 2; i < max_size; ++i)
+        F[i] = F[i - 1] + F[i - 2];
+}
+
+/* 4.
+ * FibonacciSearch - Improved binary search.
+ * O(log2n)
+ */
+int FibonacciSearch(int *a, int key, int n)
 {
     int F[max_size];
     int low = 0, high = n - 1;
@@ -89,9 +93,10 @@ int FibonacciSearch(int *a, int n, int key)
     while (n > F[k] - 1)
         ++k;
 
-    int *temp; // exten length of a to that of F[k] -1
+    int *temp; // extend length of a to that of F[k] -1
     temp = new int[F[k] - 1];
     memcpy(temp, a, n * sizeof(int));
+
     for (int i = n; i < F[k] - 1; ++i)
         temp[i] = a[n - 1];
 
@@ -113,12 +118,25 @@ int FibonacciSearch(int *a, int n, int key)
             if (mid < n)
                 return mid;
             else
-
                 return n - 1;
         }
     }
     delete[] temp;
     return -1;
+}
+
+/*
+ * Test if it's an integer input
+ */
+bool isInteger(const char *s)
+{
+    bool isValidInteger = true;
+    for (int i = 0; s[i] != '\0'; i++)
+    {
+        if (!isdigit(s[i]))
+            isValidInteger = false;
+    }
+    return isValidInteger;
 }
 
 /*
@@ -131,8 +149,7 @@ int GenKeyNumber()
     uniform_int_distribution<> distr(MIN, MAX); //define the range
 
     //assign the rand value to key number
-    key = distr(gen);
-    return key;
+    return distr(gen);
 }
 
 void BuildDataDictionary()
@@ -142,37 +159,61 @@ void BuildDataDictionary()
 
     // Assign values to array
     for (int i = 0; i < MAX; i++)
-        arr[i] = i; //this forms a sorted serise of [MIN, MAX]
-                    //arr[i] = GenKeyNumber(); //this forms randomly filled numbers
+        //arr[i] = i; //this forms a sorted serise of [MIN, MAX]
+        arr[i] = GenKeyNumber(); //this forms randomly filled numbers
 }
+
+/*
+ * Display search results - Lambda expression way.
+ */
+static auto dispResult = [](string str, int index, auto diffTime) {
+    if (index != -1)
+        cout << left << setw(20) << str << " key(" << key << ") found @ index: " << index << " ," << chrono::duration_cast<chrono::microseconds>(diffTime).count() << " ms." << endl;
+    else
+        cout << left << setw(20) << str << " key(" << key << ") NOT found, " << chrono::duration_cast<chrono::microseconds>(diffTime).count() << " ms." << endl;
+};
 
 void test()
 {
     int index;
-    t0 = clock(); // Time (start)
-    // Do Fibnacci search
-    index = FibonacciSearch(arr, MAX, key);
-    t1 = clock(); // Time (end of computation)
-    cout << key << " by FibonacciSearch() is located at: " << index << endl;
-    cout << (double)(t1 - t0) / CLOCKS_PER_SEC << " seconds." << endl;
 
-    index = BinarySearch(arr, key, MAX);
-    t2 = clock();
-    cout << key << " by BinarySearch() is located at: " << index << endl;
-    cout << (double)(t2 - t1) / CLOCKS_PER_SEC << " seconds." << endl;
-
-    index = InsertionSearch(arr, key, MIN, MAX);
-    t3 = clock();
-    cout << key << " by InsertionSearch() is located at: " << index << endl;
-    cout << (double)(t3 - t2) / CLOCKS_PER_SEC << " seconds." << endl;
-
+    auto t0 = chrono::high_resolution_clock::now(); //get start time
     index = SequenceSearch(arr, key, MAX);
-    cout << key << " by SequenceSearch() is located at: " << index << endl;
-    cout << (double)(t4 - t3) / CLOCKS_PER_SEC << " seconds." << endl;
+    auto t1 = chrono::high_resolution_clock::now(); //get start time
+    dispResult("1. SequenceSearch", index, t1 - t0);
+
+    index = BinarySearch(arr, key, MAX - 1);
+    auto t2 = chrono::high_resolution_clock::now(); //get start time
+    dispResult("2. BinarySearch", index, t2 - t1);
+
+    index = InsertionSearch(arr, key, MIN, MAX - 1);
+    auto t3 = chrono::high_resolution_clock::now(); //get start time
+    dispResult("3. InsertionSearch", index, t3 - t2);
+
+    index = FibonacciSearch(arr, key, MAX - 1);
+    auto t4 = chrono::high_resolution_clock::now(); //get start time
+    dispResult("4. FibonacciSearch", index, t4 - t3);
 }
 
-int main()
+int main(int argc, char const *argv[])
 {
+    // Check cmd line args
+    if (argc != 2)
+    {
+        cerr << "Usage: SearchComp key" << endl;
+        return 1;
+    }
+
+    if (isInteger(argv[1]))
+    {
+        key = stoi(argv[1]);
+    }
+    else
+    {
+        cerr << "key needs to be an integer." << endl;
+        return 1;
+    }
+
     try
     {
         // Instantiation
@@ -184,11 +225,11 @@ int main()
         // Start test
         test();
     }
-    catch (...)
+    catch (const std::exception &e)
     {
-        cout << "ERROR!" << endl;
-        return -1;
+        std::cerr << e.what() << '\n';
     }
+
     delete[] arr;
     return 0;
 }
