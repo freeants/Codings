@@ -11,9 +11,9 @@
 #include <chrono>
 using namespace std;
 
-const int max_size = 200; // Size of Fibonacci array
-const int MAX = 200;      // Size of data dictionary
-const int MIN = 0;
+const int max_size = 500000; // Size of Fibonacci array
+const int MAX = max_size / 2; // Size of data dictionary
+const int MIN = -(max_size / 2);
 
 int *arr; // Gloable data dictionary
 int key;  // The key number to be searched for
@@ -158,9 +158,12 @@ void BuildDataDictionary()
     arr = new int[MAX];
 
     // Assign values to array
-    for (int i = 0; i < MAX; i++)
-        //arr[i] = i; //this forms a sorted serise of [MIN, MAX]
-        arr[i] = GenKeyNumber(); //this forms randomly filled numbers
+    for (int i = MIN; i <= MAX; i++)
+    {
+        arr[i] = i; //this forms a sorted serise of [MIN, MAX]
+        //arr[i] = GenKeyNumber(); //this forms randomly filled numbers
+        //cout << arr[i] << " ";
+    }
 }
 
 /*
@@ -168,7 +171,7 @@ void BuildDataDictionary()
  */
 static auto dispResult = [](string str, int index, auto diffTime) {
     if (index != -1)
-        cout << left << setw(20) << str << " key(" << key << ") found @ index: " << index << " ," << chrono::duration_cast<chrono::microseconds>(diffTime).count() << " ms." << endl;
+        cout << left << setw(20) << str << " key(" << key << ") found @ index: " << index << ", " << chrono::duration_cast<chrono::microseconds>(diffTime).count() << " ms." << endl;
     else
         cout << left << setw(20) << str << " key(" << key << ") NOT found, " << chrono::duration_cast<chrono::microseconds>(diffTime).count() << " ms." << endl;
 };
@@ -177,12 +180,14 @@ void test()
 {
     int index;
 
+    cout << "Dataset rang - [" << MIN << ", " << MAX << "]" << endl;
     auto t0 = chrono::high_resolution_clock::now(); //get start time
+    
     index = SequenceSearch(arr, key, MAX);
     auto t1 = chrono::high_resolution_clock::now(); //get start time
     dispResult("1. SequenceSearch", index, t1 - t0);
 
-    index = BinarySearch(arr, key, MAX - 1);
+    index = BinarySearch(arr, key, MAX);
     auto t2 = chrono::high_resolution_clock::now(); //get start time
     dispResult("2. BinarySearch", index, t2 - t1);
 
@@ -190,7 +195,7 @@ void test()
     auto t3 = chrono::high_resolution_clock::now(); //get start time
     dispResult("3. InsertionSearch", index, t3 - t2);
 
-    index = FibonacciSearch(arr, key, MAX - 1);
+    index = FibonacciSearch(arr, key, MAX);
     auto t4 = chrono::high_resolution_clock::now(); //get start time
     dispResult("4. FibonacciSearch", index, t4 - t3);
 }
@@ -198,30 +203,28 @@ void test()
 int main(int argc, char const *argv[])
 {
     // Check cmd line args
-    if (argc != 2)
-    {
-        cerr << "Usage: SearchComp key" << endl;
-        return 1;
-    }
+    //if (argc != 2)
+    //{
+    //    cerr << "Usage: SearchComp key" << endl;
+    //    return 1;
+    //}
 
-    if (isInteger(argv[1]))
-    {
-        key = stoi(argv[1]);
-    }
-    else
-    {
-        cerr << "key needs to be an integer." << endl;
-        return 1;
-    }
+    //if (isInteger(argv[1]))
+    //{
+    //    key = stoi(argv[1]);
+    //}
+    //else
+    //{
+    //    cerr << "key needs to be an integer." << endl;
+    //    return 1;
+    //}
 
     try
     {
         // Instantiation
         BuildDataDictionary();
-
-        // Generate the key value to be searched for
-        GenKeyNumber();
-
+        // Generate key
+        key = GenKeyNumber();
         // Start test
         test();
     }
