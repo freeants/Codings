@@ -12,8 +12,8 @@
 using namespace std;
 
 const int max_size = 500000; // Size of Fibonacci array
-const int MAX = max_size / 2; // Size of data dictionary
-const int MIN = -(max_size / 2);
+const int MAX = max_size;    // Size of data dictionary
+const int MIN = 0;
 
 int *arr; // Gloable data dictionary
 int key;  // The key number to be searched for
@@ -182,7 +182,7 @@ void test()
 
     cout << "Dataset rang - [" << MIN << ", " << MAX << "]" << endl;
     auto t0 = chrono::high_resolution_clock::now(); //get start time
-    
+
     index = SequenceSearch(arr, key, MAX);
     auto t1 = chrono::high_resolution_clock::now(); //get start time
     dispResult("1. SequenceSearch", index, t1 - t0);
