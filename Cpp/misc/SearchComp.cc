@@ -9,7 +9,7 @@
 #include <chrono>
 using namespace std;
 
-const int MAX = 999999999;    // Size of data dictionary
+const int MAX = 999999; // Size of data dictionary
 const int MIN = 0;
 
 int *arr; // Gloable data dictionary
@@ -202,10 +202,11 @@ int ExponentialSearch(int A[], int n, int T)
  */
 int TernarySearch(int A[], int l, int r, int T)
 {
-    if (r >= 1)
+    int m1 = 0, m2 = 0;
+    if (l <= r)
     {
-        int m1 = l + (r - l) / 3;
-        int m2 = r - (r - l) / 3;
+        m1 = l + (r - l) / 3;
+        m2 = r - (r - l) / 3;
         if (A[m1] == T)
             return m1;
         if (A[m2] == T)
@@ -251,6 +252,30 @@ int JumpSearch(int A[], int n, int T)
     return -1;
 }
 
+/* 
+ * bucketSort() - Non-Comparision Sort algorithm, bucket sorting
+ * O(n+k), O(n+k), Stable
+ */
+void bucketSort(int A[], int n, int max)
+{
+    int i, j;
+    int buckets[max];
+
+    // Initiate all values to 0 in buckets
+    memset(buckets, 0, max * sizeof(int));
+
+    // 1. counting
+    for (i = 0; i < n; i++)
+        buckets[A[i]]++;
+
+    // 2. sorting
+    for (i = 0, j = 0; i < max; i++)
+    {
+        while ((buckets[i]--) > 0)
+            A[j++] = i;
+    }
+}
+
 /*
  * GenKeyNumber() - Generate key number randomly.
  */
@@ -269,28 +294,33 @@ void BuildDataDictionary()
     // Define the array that holds all data
     arr = new int[MAX];
 
-    // Assign values to array
+    // Assign values to array with random numbers
+    auto t0 = chrono::high_resolution_clock::now(); //get start time
     for (int i = MIN; i <= MAX; i++)
-    {
-        arr[i] = i; //this forms a sorted serise of [MIN, MAX]
-    }
+        arr[i] = GenKeyNumber();                    //this forms a sorted serise of [MIN, MAX]
+    auto t1 = chrono::high_resolution_clock::now(); //get start time
+    cout << "Building radom data set [" + to_string(MIN) + ", " + to_string(MAX) + "] ... " << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << " ms." << endl;
+    // Sort the array for future searching
+    bucketSort(arr, MAX, MAX + 1);
+    auto t2 = chrono::high_resolution_clock::now(); //get start time
+    cout << "Bucket Sorting for searching ... " << chrono::duration_cast<chrono::microseconds>(t2 - t1).count() << " ms." << endl;
 }
 
 /*
  * Display search results - Lambda expression way.
  */
 static auto dispResult = [](string str, int index, auto diffTime) {
-    if (index != -1)
-        cout << left << setw(20) << str << " key(" << key << ") found @ index: " << index << ", " << chrono::duration_cast<chrono::microseconds>(diffTime).count() << " ms." << endl;
-    else
+    if (index == -1) // No searching matches found
         cout << left << setw(20) << str << " key(" << key << ") NOT found, " << chrono::duration_cast<chrono::microseconds>(diffTime).count() << " ms." << endl;
+    else // Found matches display
+        cout << left << setw(20) << str << " key(" << key << ") found @ index: " << index << ", " << chrono::duration_cast<chrono::microseconds>(diffTime).count() << " ms." << endl;
 };
 
 void test()
 {
     int index;
 
-    cout << "Dataset rang - [" << MIN << ", " << MAX << "]" << endl;
+    cout << "Comparing Searching Algorithms (c++) ..." << endl;
     auto t0 = chrono::high_resolution_clock::now(); //get start time
 
     index = SequenceSearch(arr, MAX, key);
@@ -309,17 +339,20 @@ void test()
     auto t4 = chrono::high_resolution_clock::now(); //get start time
     dispResult("4. Fibonacci", index, t4 - t3);
 
-    index = ExponentialSearch(arr, MAX, key);
+    index = ExponentialSearch(arr, MAX - 1, key);
     auto t5 = chrono::high_resolution_clock::now(); //get start time
     dispResult("5. Exponential", index, t5 - t4);
 
-    index = TernarySearch(arr, MIN, MAX - 1, key);
+    index = TernarySearch(arr, MIN, MAX, key);
     auto t6 = chrono::high_resolution_clock::now(); //get start time
     dispResult("6. Ternary", index, t6 - t5);
 
     index = JumpSearch(arr, MAX - 1, key);
     auto t7 = chrono::high_resolution_clock::now(); //get start time
     dispResult("7. Jump", index, t7 - t6);
+
+    cout << "//////////////////////////////////////////////////////////" << endl;
+    cout << left << setw(20) << "Total searching time: " << chrono::duration_cast<chrono::microseconds>(t7 - t0).count() << " ms." << endl;
 }
 
 int main(int argc, char const *argv[])
