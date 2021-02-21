@@ -343,7 +343,7 @@ void test()
     auto t5 = chrono::high_resolution_clock::now(); //get start time
     dispResult("5. Exponential", index, t5 - t4);
 
-    index = TernarySearch(arr, MIN, MAX, key);
+    index = TernarySearch(arr, MIN, MAX - 1, key);
     auto t6 = chrono::high_resolution_clock::now(); //get start time
     dispResult("6. Ternary", index, t6 - t5);
 
