@@ -279,6 +279,7 @@ void bucketSort(int A[], int n, int max)
 /*
  * GenKeyNumber() - Generate key number randomly.
  */
+/*
 int GenKeyNumber()
 {
     random_device rd;                           //obtain a random number from hardware
@@ -288,6 +289,7 @@ int GenKeyNumber()
     //assign the rand value to key number
     return distr(gen);
 }
+*/
 
 void BuildDataDictionary()
 {
@@ -296,8 +298,16 @@ void BuildDataDictionary()
 
     // Assign values to array with random numbers
     auto t0 = chrono::high_resolution_clock::now(); //get start time
+
+    random_device rd;                           //obtain a random number from hardware
+    mt19937 gen(rd());                          //seed the generator
+    uniform_int_distribution<> distr(MIN, MAX); //define the range
+
+    // Generate key
+    key = distr(gen);
     for (int i = MIN; i <= MAX; i++)
-        arr[i] = GenKeyNumber();                    //this forms a sorted serise of [MIN, MAX]
+        arr[i] = distr(gen); //this forms a sorted serise of [MIN, MAX]
+
     auto t1 = chrono::high_resolution_clock::now(); //get start time
     cout << "Building radom data set [" + to_string(MIN) + ", " + to_string(MAX) + "] ... " << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << " ms." << endl;
     // Sort the array for future searching
@@ -361,8 +371,7 @@ int main(int argc, char const *argv[])
     {
         // Instantiation
         BuildDataDictionary();
-        // Generate key
-        key = GenKeyNumber();
+
         // Start test
         test();
     }

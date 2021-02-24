@@ -1,115 +1,164 @@
 /*
-    File: SortComp.cxx - Compare sort algorithms.
-    Copyright:  (c) freeants. All rights reserved.
- */
+    File    :   SortAlgorithms.cc - In demostrating and comparision of various sort methods.
+    Author  :   freeants (c), All rights reserved.
+    Version :   v0.1 Feb 23, 2021. 
+*/
+
 #include <chrono>
 #include <ctime>
 #include <random>
 #include <iostream>
 #include <iomanip>
-#include <algorithm>
-#include <cstring>
-#include <vector>
-
 using namespace std;
 
-int max_size; // Size of data dictionary
-
-int *a; // Data dictionary
-int *t; // Temp data dictionary
-
 /*
+ * Gloabl vars
+ */
+int max_size; // Size of data dictionary
+int *a;       // Data dictionary
+int *t;       // Temp data dictionary
+
+/* Swap(int *, int *)
+ * Swap the value of two elements.
+ */
+void Swap(int *xp, int *yp)
+{
+    /* Swap using a third variable tmp, traditional swapping method, base
+        int tmp = *xp;
+        *yp = *xp;
+        *xp = tmp;
+     */
+
+    /* Swap using bitwise XOR, sequence point introduced using comma, fast 
+        (*xp ^= *yp), (*yp ^= *xp), (*xp ^= *yp);
+    */
+
+    /* Inline asm for optimal performance, portable to all platform, fastest */
+    asm(""
+        : "=r"(*xp), "=r"(*yp)
+        : "1"(*xp), "0"(*yp));
+}
+
+/* isSorted(int *, int)
  * Verify if the array was sorted.
  */
-bool isSorted(int *arr)
+bool isSorted(int *arr, int n)
 {
-    for (int i = 1; i < max_size; i++)
+    for (int i = 1; i < n; i++)
         if (arr[i] < arr[i - 1])
             return false;
     return true;
 }
 
-//void dispResult(string str, auto diffTime, int *arr)
-//above is okay for g++, for clang, no auto param allowed.
+/*
+ * Lamda expression for displaying stats.
+ */
 static auto dispResult = [](string str, auto diffTime, int *arr) {
-    cout << left << setw(20) << str << setw(20) << chrono::duration_cast<chrono::microseconds>(diffTime).count() << isSorted(arr) << endl;
+    cout << left << setw(20) << str << setw(20) << chrono::duration_cast<chrono::microseconds>(diffTime).count() << isSorted(arr, max_size) << endl;
 };
 
-/* 1.
- * bubbleSort() - Comparision Sort algorithm, exchange sorting
- * O(n²), O(1), Stable
+/*1. bubbleSort(int A[], int n)
+ * Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that
+ * repeatedly steps through the list, compares adjacent elements and swaps them if they 
+ * are in the wrong order. The pass through the list is repeated until the list is sorted.
+ * The algorithm, which is a comparison sort, is named for the way smaller or larger 
+ * elements "bubble" to the top of the list. This simple algorithm performs poorly 
+ * in real world use and is used primarily as an educational tool.
+ * 
+ * Worst-case performance: O(n²)/O(n²) comparisons/swaps
+ * Best-case performance : O(n)/O(1) 
+ * Average performance   : O(n²)/O(n²)
+ * Worst-case space complexity: O(1)/O(1) total/auxiliary
+ * Stable: yes, Method: Exchanging, Note: Tiny code size
  */
-void bubbleSort(int *arr, int n)
+void bubbleSort(int A[], int n)
 {
-    bool swapped = true;
-    int j = 0;
-    int tmp;
-    while (swapped)
+    int newn;
+    while (n > 1)
     {
-        swapped = false;
-        j++;
-        for (int i = 0; i < n - j; i++)
+        newn = 0;
+        for (int i = 1; i < n; i++)
         {
-            if (arr[i] > arr[i + 1])
+            if (A[i - 1] > A[i])
             {
-                tmp = arr[i];
-                arr[i] = arr[i + 1];
-                arr[i + 1] = tmp;
-                swapped = true;
+                Swap(&A[i - 1], &A[i]);
+                newn = i;
             }
         }
+        n = newn;
     }
 }
 
-/* 2.
- * quickSort() - Comparision Sort algorithm, exchange sorting
- * O(nlog(n)), O(nlog(n)), Unstable
+/*2. quickSort(int A[], int lo, int hi)
+ * Quicksort is a divide-and-conquer algorithm. It works by selecting a 'pivot' element
+ * from the array and partitioning the other elements into two sub-arrays, according 
+ * to whether they are less than or greater than the pivot. The sub-arrays are then 
+ * sorted recursively. This can be done in-place, requiring small additional amounts of 
+ * memory to perform the sorting. 
+ * Quicksort is a comparison sort, meaning that it can sort items of any type for 
+ * which a "less-than" relation (formally, a total order) is defined. Efficient 
+ * implementations of Quicksort are not a stable sort, meaning that the relative order 
+ * of equal sort items is not preserved.
+ * 
+ * Worst-case performance: O(n²)
+ * Best-case performance : O(n log n)
+ * Average performance   : O(n log n)
+ * Worst-case space complexity: O(log n)
+ * Stable: No, Method: Partitioning, Note: in-place with O(log n) stack space 
  */
-void quickSort(int *arr, int left, int right)
+void quickSort(int A[], int lo, int hi)
 {
-    int i = left, j = right;
+    int i = lo, j = hi;
     int tmp;
-    int pivot = arr[(left + right) / 2];
+    int pivot = A[(lo + hi) / 2];
 
     /* partition */
     while (i <= j)
     {
-        while (arr[i] < pivot)
+        while (A[i] < pivot)
             i++;
-        while (arr[j] > pivot)
+        while (A[j] > pivot)
             j--;
         if (i <= j)
         {
-            tmp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = tmp;
+            Swap(&A[i], &A[j]);
             i++;
             j--;
         }
     };
 
     /* recursion */
-    if (left < j)
-        quickSort(arr, left, j);
-    if (i < right)
-        quickSort(arr, i, right);
+    if (lo < j)
+        quickSort(A, lo, j);
+    if (i < hi)
+        quickSort(A, i, hi);
 }
 
-/* 3.
- * insertionSort() - Comparision Sort algorithm, insertion sorting
- * O(n²), O(1), Stable
+/* 3. insertionSort(int A[], int n)
+ * Insertion sort is a simple sorting algorithm that is relatively efficient for
+ * small lists and mostly sorted lists, and is often used as part of more sophisticated 
+ * algorithms. It works by taking elements from the list one by one and inserting 
+ * them in their correct position into a new sorted list similar to how we put money 
+ * in our wallet. In arrays, the new list and the remaining elements can share the 
+ * array's space, but insertion is expensive, requiring shifting all following elements 
+ * over by one. Shellsort is a variant of insertion sort that is more efficient 
+ * for larger lists.
+ * 
+ * Worst-case performance: O(n²)/O(n²) comparisons/swaps
+ * Best-case performance : O(n)/O(1) 
+ * Average performance   : O(n²)/O(n²)
+ * Worst-case space complexity: O(n)/O(1) total/auxiliary
+ * Stable: yes, Method: Insertion, Note: O(n + d), in the worst case over sequences that have d inversions.
  */
-void insertionSort(int *arr, int n)
+void insertionSort(int A[], int n)
 {
-    int i, j, tmp;
+    int i, j;
     for (i = 1; i < n; i++)
     {
         j = i;
-        while (j > 0 && arr[j - 1] > arr[j])
+        while (j > 0 && A[j - 1] > A[j])
         {
-            tmp = arr[j];
-            arr[j] = arr[j - 1];
-            arr[j - 1] = tmp;
+            Swap(&A[j], &A[j - 1]);
             j--;
         }
     }
@@ -119,20 +168,20 @@ void insertionSort(int *arr, int n)
  * shellSort() - Comparision Sort algorithm, insertion sorting
  * O(n^1.3), O(1), Unstable
  */
-void shellSort(int *arr, int n)
+void shellSort(int A[], int n)
 {
     for (int gap = n / 2; gap > 0; gap /= 2)
     {
         for (int i = gap; i < n; i++)
         {
             int j = i;
-            int current = arr[i];
-            while (j - gap >= 0 && current < arr[j - gap])
+            int current = A[i];
+            while (j - gap >= 0 && current < A[j - gap])
             {
-                arr[j] = arr[j - gap];
+                A[j] = A[j - gap];
                 j -= gap;
             }
-            arr[j] = current;
+            A[j] = current;
         }
     }
 }
@@ -141,21 +190,17 @@ void shellSort(int *arr, int n)
  * selectionSort() - Comparision Sort algorithm, selection sorting
  * O(n²), O(1), Unstable
  */
-void selectionSort(int *arr, int n)
+void selectionSort(int A[], int n)
 {
-    int i, j, minIndex, tmp;
+    int i, j, minIndex;
     for (i = 0; i < n - 1; i++)
     {
         minIndex = i;
         for (j = i + 1; j < n; j++)
-            if (arr[j] < arr[minIndex])
+            if (A[j] < A[minIndex])
                 minIndex = j;
         if (minIndex != i)
-        {
-            tmp = arr[i];
-            arr[i] = arr[minIndex];
-            arr[minIndex] = tmp;
-        }
+            Swap(&A[i], &A[minIndex]);
     }
 }
 
@@ -165,45 +210,42 @@ void selectionSort(int *arr, int n)
  */
 // To heapify a subtree rooted with node i which is
 // an index in arr[]. n is size of heap
-void heapify(int *arr, int n, int i)
+void heapify(int A[], int n, int i)
 {
     int largest = i;   // Initialize largest as root
     int l = 2 * i + 1; // left = 2*i + 1
     int r = 2 * i + 2; // right = 2*i + 2
 
     // If left child is larger than root
-    if (l < n && arr[l] > arr[largest])
+    if (l < n && A[l] > A[largest])
         largest = l;
 
     // If right child is larger than largest so far
-    if (r < n && arr[r] > arr[largest])
+    if (r < n && A[r] > A[largest])
         largest = r;
 
     // If largest is not root
     if (largest != i)
     {
-        swap(arr[i], arr[largest]);
-
+        Swap(&A[i], &A[largest]);
         // Recursively heapify the affected sub-tree
-        heapify(arr, n, largest);
+        heapify(A, n, largest);
     }
 }
-
 // main function to do heap sort
-void heapSort(int *arr, int n)
+void heapSort(int A[], int n)
 {
     // Build heap (rearrange array)
     for (int i = n / 2 - 1; i >= 0; i--)
-        heapify(arr, n, i);
+        heapify(A, n, i);
 
     // One by one extract an element from heap
     for (int i = n - 1; i >= 0; i--)
     {
         // Move current root to end
-        swap(arr[0], arr[i]);
-
+        Swap(&A[0], &A[i]);
         // call max heapify on the reduced heap
-        heapify(arr, i, 0);
+        heapify(A, i, 0);
     }
 }
 
@@ -211,43 +253,43 @@ void heapSort(int *arr, int n)
  * mergeSort() - Comparision Sort algorithm, merge sorting
  * O(nlog(n)), O(n), Stable
  */
-void merge(int *arr, int low, int mid, int high)
+void merge(int A[], int low, int mid, int high)
 {
 
     int i = low, j = mid + 1, k = 0;
-    int *temp = new int[high - low + 1];
+    int *tmp = new int[high - low + 1];
     while (i <= mid && j <= high)
     {
-        if (arr[i] <= arr[j])
-            temp[k++] = arr[i++];
+        if (A[i] <= A[j])
+            tmp[k++] = A[i++];
         else
-            temp[k++] = arr[j++];
+            tmp[k++] = A[j++];
     }
     while (i <= mid)
-        temp[k++] = arr[i++];
+        tmp[k++] = A[i++];
     while (j <= high)
-        temp[k++] = arr[j++];
+        tmp[k++] = A[j++];
     for (i = low, k = 0; i <= high; i++, k++)
-        arr[i] = temp[k];
-    delete[] temp;
+        A[i] = tmp[k];
+    delete[] tmp;
 }
-void mergeSort(int *arr, int low, int high)
+void mergeSort(int A[], int lo, int hi)
 {
-    if (low >= high)
+    if (lo >= hi)
     {
         return;
     }
-    int mid = low + (high - low) / 2;
-    mergeSort(arr, low, mid);
-    mergeSort(arr, mid + 1, high);
-    merge(arr, low, mid, high);
+    int mid = lo + (hi - lo) / 2;
+    mergeSort(A, lo, mid);
+    mergeSort(A, mid + 1, hi);
+    merge(A, lo, mid, hi);
 }
 
 /* 8.
  * bucketSort() - Non-Comparision Sort algorithm, bucket sorting
  * O(n+k), O(n+k), Stable
  */
-void bucketSort(int *arr, int n, int max)
+void bucketSort(int A[], int n, int max)
 {
     int i, j;
     int buckets[max];
@@ -257,25 +299,15 @@ void bucketSort(int *arr, int n, int max)
 
     // 1. counting
     for (i = 0; i < n; i++)
-        buckets[arr[i]]++;
+        buckets[A[i]]++;
 
     // 2. sorting
     for (i = 0, j = 0; i < max; i++)
     {
         while ((buckets[i]--) > 0)
-            arr[j++] = i;
+            A[j++] = i;
     }
 }
-
-/*
- * GenRandomNumber() - Generate number randomly in rang [0, max_size].
- */
-//int GenRandomNumber()
-//{
-
-    //return the rand value
-    //return distr(gen);
-//}
 
 void getInput()
 {
@@ -294,6 +326,7 @@ void BuildDataDictionary()
     // Define the array that holds all data
     a = new int[max_size];
     t = new int[max_size];
+
     random_device rd;                              //obtain a random number from hardware
     mt19937 gen(rd());                             //seed the generator
     uniform_int_distribution<> distr(0, max_size); //define the range
@@ -319,7 +352,7 @@ void copyArry(int *x, int *y)
  */
 void test()
 {
-    cout << "Comparing sort algorithms (C++) ..." << endl;
+    cout << "***Comparing sort algorithms (C++) ..." << endl;
     cout << left << setw(20) << "Algorithm" << setw(20) << "Time elapsed(μ)"
          << "Is sorted?" << endl;
 
@@ -355,7 +388,7 @@ void test()
     dispResult("6.Heap", t6 - t5, t);
 
     copyArry(a, t);
-    mergeSort(t, 0, max_size);
+    mergeSort(t, 0, max_size - 1);
     auto t7 = chrono::high_resolution_clock::now(); //get end time
     dispResult("7.Merge", t7 - t6, t);
 
