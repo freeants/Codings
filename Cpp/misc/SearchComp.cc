@@ -7,9 +7,10 @@
 #include <random>
 #include <iomanip>
 #include <chrono>
+#include <cstring>
 using namespace std;
 
-const int MAX = 999999; // Size of data dictionary
+const int MAX = 1999999; // Size of data dictionary
 const int MIN = 0;
 
 int *arr; // Gloable data dictionary

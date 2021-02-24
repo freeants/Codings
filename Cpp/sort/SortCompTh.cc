@@ -354,7 +354,7 @@ void test()
 
     /** start the array sort threads */
     auto t0 = chrono::high_resolution_clock::now(); //get start time
-    //thread st_t0(bubbleSort, d0, max_size);
+    thread st_t0(bubbleSort, d0, max_size);
     thread st_t1(quickSort, d1, 0, max_size - 1);
     thread st_t2(insertionSort, d2, max_size);
     thread st_t3(shellSort, d3, max_size);
@@ -362,9 +362,9 @@ void test()
     thread st_t5(heapSort, d5, max_size);
     thread st_t6(mergeSort, d6, 0, max_size);
     thread st_t7(bucketSort, d7, max_size, max_size + 1);
-   // st_t0.join();
+    st_t0.join();
     auto t1 = chrono::high_resolution_clock::now(); //get start time
-   // dispResult("1.Bubble", t1 - t0, d0);
+    dispResult("1.Bubble", t1 - t0, d0);
     st_t1.join();
     auto t2 = chrono::high_resolution_clock::now(); //get start time
     dispResult("2.Quick", t2 - t1, d1);
