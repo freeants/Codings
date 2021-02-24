@@ -40,6 +40,11 @@ void Swap(int *xp, int *yp, int mode)
             : "=r"(*xp), "=r"(*yp)
             : "1"(*xp), "0"(*yp));
         break;
+
+    case 3:
+        /* System lib std::swap() */
+        swap(*xp, *yp);
+        break;
     }
 }
 
@@ -99,6 +104,13 @@ void test()
     }
     auto t3 = chrono::high_resolution_clock::now(); //get end time
     dispResult("2. inline asm method", t3 - t2);
+
+    for (size_t i = 1; i < max_size; i++)
+    {
+        Swap(&a[i], &a[i - 1], 3); // test std::swap() method
+    }
+    auto t4 = chrono::high_resolution_clock::now(); //get end time
+    dispResult("3. std::swap() method", t4 - t3);
 }
 
 int main()
