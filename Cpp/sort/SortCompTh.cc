@@ -32,8 +32,7 @@ bool isSorted(int *arr)
 
 //void dispResult(string str, auto diffTime, int *arr)
 //above is okay for g++, for clang, no auto param allowed.
-static auto dispResult =[](string str, auto diffTime, int *arr)
-{
+static auto dispResult = [](string str, auto diffTime, int *arr) {
     cout << left << setw(20) << str << setw(20) << chrono::duration_cast<chrono::microseconds>(diffTime).count() << isSorted(arr) << endl;
 };
 
@@ -269,6 +268,7 @@ void bucketSort(int *arr, int n, int max)
 /*
  * GenRandomNumber() - Generate number randomly in rang [0, max_size].
  */
+/*
 int GenRandomNumber()
 {
     random_device rd;                              //obtain a random number from hardware
@@ -278,6 +278,7 @@ int GenRandomNumber()
     //return the rand value
     return distr(gen);
 }
+*/
 
 void getInput()
 {
@@ -314,8 +315,11 @@ void BuildDataDictionary()
     d7 = new int[max_size];
 
     // Assign values to array
+    random_device rd;                              //obtain a random number from hardware
+    mt19937 gen(rd());                             //seed the generator
+    uniform_int_distribution<> distr(0, max_size); //define the range
     for (int i = 0; i < max_size; i++)
-        a[i] = GenRandomNumber(); //this forms randomly filled numbers
+        a[i] = distr(gen); //this forms randomly filled numbers
 
     auto t1 = chrono::high_resolution_clock::now(); //get end time
     cout << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << " micro(μ) seconds" << endl;
@@ -350,31 +354,39 @@ void test()
 
     /** start the array sort threads */
     auto t0 = chrono::high_resolution_clock::now(); //get start time
-    thread st_t0(bubbleSort, d0, max_size);
-    thread st_t1(quickSort, d1, 0, max_size);
+    //thread st_t0(bubbleSort, d0, max_size);
+    thread st_t1(quickSort, d1, 0, max_size - 1);
     thread st_t2(insertionSort, d2, max_size);
     thread st_t3(shellSort, d3, max_size);
     thread st_t4(selectionSort, d4, max_size);
     thread st_t5(heapSort, d5, max_size);
     thread st_t6(mergeSort, d6, 0, max_size);
     thread st_t7(bucketSort, d7, max_size, max_size + 1);
-    st_t0.join();   auto t1 = chrono::high_resolution_clock::now(); //get start time
-    dispResult("1.Bubble", t1 - t0, d0);
-    st_t1.join();   auto t2 = chrono::high_resolution_clock::now(); //get start time
+   // st_t0.join();
+    auto t1 = chrono::high_resolution_clock::now(); //get start time
+   // dispResult("1.Bubble", t1 - t0, d0);
+    st_t1.join();
+    auto t2 = chrono::high_resolution_clock::now(); //get start time
     dispResult("2.Quick", t2 - t1, d1);
-    st_t2.join();   auto t3 = chrono::high_resolution_clock::now(); //get start time
+    st_t2.join();
+    auto t3 = chrono::high_resolution_clock::now(); //get start time
     dispResult("3.Insertion", t3 - t2, d2);
-    st_t3.join();   auto t4 = chrono::high_resolution_clock::now(); //get start time
+    st_t3.join();
+    auto t4 = chrono::high_resolution_clock::now(); //get start time
     dispResult("4.Shell", t4 - t3, d3);
-    st_t4.join();   auto t5 = chrono::high_resolution_clock::now(); //get start time
+    st_t4.join();
+    auto t5 = chrono::high_resolution_clock::now(); //get start time
     dispResult("5.Selection", t5 - t4, d4);
-    st_t5.join();   auto t6 = chrono::high_resolution_clock::now(); //get start time
+    st_t5.join();
+    auto t6 = chrono::high_resolution_clock::now(); //get start time
     dispResult("6.Heap", t6 - t5, d5);
-    st_t6.join();   auto t7 = chrono::high_resolution_clock::now(); //get start time
+    st_t6.join();
+    auto t7 = chrono::high_resolution_clock::now(); //get start time
     dispResult("7.Merge", t7 - t6, d6);
-    st_t7.join();   auto t8 = chrono::high_resolution_clock::now(); //get start time
+    st_t7.join();
+    auto t8 = chrono::high_resolution_clock::now(); //get start time
     dispResult("8.Bucket", t8 - t7, d7);
-    
+
     auto t = chrono::high_resolution_clock::now(); //get end time
 
     /** print results */
