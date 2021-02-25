@@ -39,7 +39,7 @@ void Swap(int *a, int *b, int mode)
             : "1"(*a), "0"(*b));
         break;
     case 3:
-        /* Inline GNU C asm for optimal performance, portable to all platform */
+        /* Inline x86 'xchg' asm , no portability outside X86 */
         asm("xchg %0, %1;"
             : "+r"(*a), "+r"(*b));
         break;
