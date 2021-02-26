@@ -14,6 +14,11 @@ using namespace std;
 const int max_size = 99999999; // Size of data dictionary
 int *a;                        // Data set array
 int tmp;                       // tmp
+string info[] = {"0. Using 'tmp' method",
+                 "1. bitwise XOR method",
+                 "2. inline asm method",
+                 "3. inline 'xchg' method",
+                 "4. std::swap() method"};
 
 /* Swap(int *, int *, int)
  * Swap the value of two elements.
@@ -85,41 +90,16 @@ static auto dispResult = [](string str, auto diffTime) {
  */
 void test()
 {
-    auto t0 = chrono::high_resolution_clock::now(); //get start time
-    for (size_t i = 1; i < max_size; i++)
+    for (int m = 0; m < 5; m++)
     {
-        Swap(&a[i], &a[i - 1], 0); // test the traditional tmp method
+        auto t0 = chrono::high_resolution_clock::now(); //get start time
+        for (size_t i = 1; i < max_size; i++)
+        {
+            Swap(&a[i], &a[i - 1], m); // test 5 swap methods
+        }
+        auto t1 = chrono::high_resolution_clock::now(); //get end time
+        dispResult(info[m], t1 - t0);
     }
-    auto t1 = chrono::high_resolution_clock::now(); //get end time
-    dispResult("0. Using 'tmp' method", t1 - t0);
-
-    for (size_t i = 1; i < max_size; i++)
-    {
-        Swap(&a[i], &a[i - 1], 1); // test the bitwise XOR method
-    }
-    auto t2 = chrono::high_resolution_clock::now(); //get end time
-    dispResult("1. bitwise XOR method", t2 - t1);
-
-    for (size_t i = 1; i < max_size; i++)
-    {
-        Swap(&a[i], &a[i - 1], 2); // test the inline GNU asm method
-    }
-    auto t3 = chrono::high_resolution_clock::now(); //get end time
-    dispResult("2. inline asm method", t3 - t2);
-
-    for (size_t i = 1; i < max_size; i++)
-    {
-        Swap(&a[i], &a[i - 1], 3); // test the 'xchg' asm method
-    }
-    auto t4 = chrono::high_resolution_clock::now(); //get end time
-    dispResult("3. inline 'xchg' method", t4 - t3);
-
-    for (size_t i = 1; i < max_size; i++)
-    {
-        Swap(&a[i], &a[i - 1], 4); // test std::swap() method
-    }
-    auto t5 = chrono::high_resolution_clock::now(); //get end time
-    dispResult("4. std::swap() method", t5 - t4);
 }
 
 int main()
