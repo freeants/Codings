@@ -30,7 +30,6 @@
         "utility": "cpp",
         "vector": "cpp"
     },
-    "java.home": "/Library/Java/JavaVirtualMachines/jdk-11.0.10.jdk/Contents/Home",
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
     "java.completion.favoriteStaticMembers": [
