@@ -4,5 +4,6 @@
         "iostream": "cpp",
         "*.inc": "c",
         "chrono": "cpp"
-    }
+    },
+    "C_Cpp.default.intelliSenseMode": "linux-gcc-x64"
 }
