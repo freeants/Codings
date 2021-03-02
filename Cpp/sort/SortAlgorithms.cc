@@ -19,26 +19,29 @@ int max_size; // Size of data dictionary
 int *a;       // Data dictionary
 int *t;       // Temp data dictionary
 
-/* Swap(int *, int *)
- * Swap the value of two elements.
+/* swap(int *, int *)
+ * swap the value of two elements.
  */
-void Swap(int *xp, int *yp)
-{
-    /* Swap using a third variable tmp, traditional swapping method, base
+
+//void swap(int *xp, int *yp)
+//{
+    /* swap using a third variable tmp, traditional swapping method, base
         int tmp = *xp;
         *yp = *xp;
         *xp = tmp;
      */
 
-    /* Swap using bitwise XOR, sequence point introduced using comma, fast 
+    /* swap using bitwise XOR, sequence point introduced using comma, fast 
         (*xp ^= *yp), (*yp ^= *xp), (*xp ^= *yp);
     */
 
-    /* Inline asm for optimal performance, portable to all platform, fastest */
+    /* Inline asm for optimal performance, portable to all platform, fastest 
     asm(""
         : "=r"(*xp), "=r"(*yp)
         : "1"(*xp), "0"(*yp));
-}
+    */
+//}
+
 
 /* isSorted(int *, int)
  * Verify if the array was sorted.
@@ -82,7 +85,7 @@ void bubbleSort(int A[], int n)
         {
             if (A[i - 1] > A[i])
             {
-                Swap(&A[i - 1], &A[i]);
+                swap(A[i - 1], A[i]);
                 newn = i;
             }
         }
@@ -122,7 +125,7 @@ void quickSort(int A[], int lo, int hi)
             j--;
         if (i <= j)
         {
-            Swap(&A[i], &A[j]);
+            swap(A[i], A[j]);
             i++;
             j--;
         }
@@ -159,7 +162,7 @@ void insertionSort(int A[], int n)
         j = i;
         while (j > 0 && A[j - 1] > A[j])
         {
-            Swap(&A[j], &A[j - 1]);
+            swap(A[j], A[j - 1]);
             j--;
         }
     }
@@ -201,7 +204,7 @@ void selectionSort(int A[], int n)
             if (A[j] < A[minIndex])
                 minIndex = j;
         if (minIndex != i)
-            Swap(&A[i], &A[minIndex]);
+            swap(A[i], A[minIndex]);
     }
 }
 
@@ -228,7 +231,7 @@ void heapify(int A[], int n, int i)
     // If largest is not root
     if (largest != i)
     {
-        Swap(&A[i], &A[largest]);
+        swap(A[i], A[largest]);
         // Recursively heapify the affected sub-tree
         heapify(A, n, largest);
     }
@@ -244,7 +247,7 @@ void heapSort(int A[], int n)
     for (int i = n - 1; i >= 0; i--)
     {
         // Move current root to end
-        Swap(&A[0], &A[i]);
+        swap(A[0], A[i]);
         // call max heapify on the reduced heap
         heapify(A, i, 0);
     }
