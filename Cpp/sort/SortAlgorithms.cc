@@ -10,6 +10,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cstring>
+#include <algorithm> //for std::sort()
 using namespace std;
 
 /*
@@ -25,23 +26,22 @@ int *t;       // Temp data dictionary
 
 //void swap(int *xp, int *yp)
 //{
-    /* swap using a third variable tmp, traditional swapping method, base
+/* swap using a third variable tmp, traditional swapping method, base
         int tmp = *xp;
         *yp = *xp;
         *xp = tmp;
      */
 
-    /* swap using bitwise XOR, sequence point introduced using comma, fast 
+/* swap using bitwise XOR, sequence point introduced using comma, fast 
         (*xp ^= *yp), (*yp ^= *xp), (*xp ^= *yp);
     */
 
-    /* Inline asm for optimal performance, portable to all platform, fastest 
+/* Inline asm for optimal performance, portable to all platform, fastest 
     asm(""
         : "=r"(*xp), "=r"(*yp)
         : "1"(*xp), "0"(*yp));
     */
 //}
-
 
 /* isSorted(int *, int)
  * Verify if the array was sorted.
@@ -401,7 +401,12 @@ void test()
     auto t8 = chrono::high_resolution_clock::now(); //get end time
     dispResult("8.Bucket", t8 - t7, t);
 
-    auto timeElapsed = chrono::duration_cast<chrono::microseconds>(t8 - t0).count();
+    copyArry(a, t);
+    sort(t, t + max_size);
+    auto t9 = chrono::high_resolution_clock::now(); //get end time
+    dispResult("9.std::sort()", t9 - t8, t);
+
+    auto timeElapsed = chrono::duration_cast<chrono::microseconds>(t9 - t0).count();
     auto timenow = chrono::system_clock::to_time_t(chrono::system_clock::now());
     cout << "////////////////////////////////////////////////////////" << endl;
     cout << left << setw(20) << " Total time" << setw(20) << timeElapsed << (double)timeElapsed / 1000000 << " seconds"

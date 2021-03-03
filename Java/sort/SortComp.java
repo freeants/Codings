@@ -1,6 +1,7 @@
 package sort;
 
 import java.util.concurrent.ThreadLocalRandom; // standard way to genrate random number in Java 1.7 and above
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -245,14 +246,11 @@ public class SortComp {
         int i, j;
         int buckets[] = new int[max];
 
-        // 将buckets中的所有数据都初始化为0。
-        // memset(buckets, 0, max * sizeof(int));
-
-        // 1. 计数
+        // 1. Counting
         for (i = 0; i < n; i++)
             buckets[arr[i]]++;
 
-        // 2. 排序
+        // 2. Sorting
         for (i = 0, j = 0; i < max; i++) {
             while ((buckets[i]--) > 0)
                 arr[j++] = i;
@@ -282,7 +280,7 @@ public class SortComp {
 
         long endTime = System.nanoTime();
         long timeElapsed = endTime - startTime;
-        System.out.println("- " + timeElapsed / 1000 + " micro(μ) seconds.");
+        System.out.println("- " + timeElapsed / 1000 + " micro seconds.");
     }
 
     static void copyArry(int x[], int y[]) {
@@ -312,7 +310,7 @@ public class SortComp {
 
         // Setting up some alignment format
         String leftAlignFormat = "%-16s %-20s %-6s%n";
-        System.out.printf(leftAlignFormat, "Algorithm", "Time elapsed(μ) ", "Is sorted?");
+        System.out.printf(leftAlignFormat, "Algorithm", "Time elapsed ", "Is sorted?");
 
         long t0 = System.nanoTime();
         copyArry(a, t);
@@ -355,8 +353,13 @@ public class SortComp {
         long t8 = System.nanoTime();
         System.out.printf(leftAlignFormat, "8.Bucket", (t8 - t7) / 1000, isSorted(t));
 
+        copyArry(a, t);
+        Arrays.sort(t);
+        long t9 = System.nanoTime();
+        System.out.printf(leftAlignFormat, "9.Arrays.sort()", (t9 - t8) / 1000, isSorted(t));
+
         // Print the summary
-        long timeElapsed = t8 - t0;
+        long timeElapsed = t9 - t0;
         System.out.println("////////////////////////////////////////////////////////");
         System.out.printf(leftAlignFormat, " Total time", timeElapsed / 1000,
                 ((float) timeElapsed / 1000000000) + " seconds");

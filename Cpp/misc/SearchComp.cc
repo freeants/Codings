@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <chrono>
 #include <cstring>
+#include <algorithm>
 using namespace std;
 
 const int MAX = 1999999; // Size of data dictionary
@@ -361,6 +362,8 @@ void test()
     index = JumpSearch(arr, MAX - 1, key);
     auto t7 = chrono::high_resolution_clock::now(); //get start time
     dispResult("7. Jump", index, t7 - t6);
+
+    index= binary_search(arr.begin(),arr.edn, key);
 
     cout << "//////////////////////////////////////////////////////////" << endl;
     cout << left << setw(20) << "Total searching time: " << chrono::duration_cast<chrono::microseconds>(t7 - t0).count() << " ms." << endl;
