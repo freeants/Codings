@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Sort2DArray",
+            "request": "launch",
+            "mainClass": "Sort2DArray",
+            "projectName": "Codings_ebae5f19"
+        },
+        {
+            "type": "java",
             "name": "Launch randtest",
             "request": "launch",
             "mainClass": "misc.randtest",

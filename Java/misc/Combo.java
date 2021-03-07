@@ -1,3 +1,4 @@
+package misc;
 public class Combo {
     static int doCombo(int m, int n) {
         if (n == 0 || n == m)
