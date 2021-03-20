@@ -1,4 +1,4 @@
-package misc;
+
 
 import java.util.concurrent.ThreadLocalRandom; // standard way to genrate random number in Java 1.7 and above
 import java.util.Scanner;
