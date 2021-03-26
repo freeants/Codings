@@ -28,7 +28,8 @@
         "system_error": "cpp",
         "unordered_map": "cpp",
         "utility": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "exception": "cpp"
     },
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,

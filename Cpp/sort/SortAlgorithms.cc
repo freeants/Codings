@@ -361,6 +361,7 @@ void test()
          << "Is sorted?" << endl;
 
     auto t0 = chrono::high_resolution_clock::now(); //get start time
+    /*
     copyArry(a, t);
     bubbleSort(t, max_size);
     auto t1 = chrono::high_resolution_clock::now(); //get end time
@@ -395,18 +396,18 @@ void test()
     mergeSort(t, 0, max_size - 1);
     auto t7 = chrono::high_resolution_clock::now(); //get end time
     dispResult("7.Merge", t7 - t6, t);
-
+*/
     copyArry(a, t);
     bucketSort(t, max_size, max_size + 1);
     auto t8 = chrono::high_resolution_clock::now(); //get end time
-    dispResult("8.Bucket", t8 - t7, t);
-
+    dispResult("8.Bucket", t8 - t0, t);
+/*
     copyArry(a, t);
     sort(t, t + max_size);
     auto t9 = chrono::high_resolution_clock::now(); //get end time
     dispResult("9.std::sort()", t9 - t8, t);
-
-    auto timeElapsed = chrono::duration_cast<chrono::microseconds>(t9 - t0).count();
+*/
+    auto timeElapsed = chrono::duration_cast<chrono::microseconds>(t8 - t0).count();
     auto timenow = chrono::system_clock::to_time_t(chrono::system_clock::now());
     cout << "////////////////////////////////////////////////////////" << endl;
     cout << left << setw(20) << " Total time" << setw(20) << timeElapsed << (double)timeElapsed / 1000000 << " seconds"
