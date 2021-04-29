@@ -278,21 +278,6 @@ void bucketSort(int A[], int n, int max)
     }
 }
 
-/*
- * GenKeyNumber() - Generate key number randomly.
- */
-/*
-int GenKeyNumber()
-{
-    random_device rd;                           //obtain a random number from hardware
-    mt19937 gen(rd());                          //seed the generator
-    uniform_int_distribution<> distr(MIN, MAX); //define the range
-
-    //assign the rand value to key number
-    return distr(gen);
-}
-*/
-
 void BuildDataDictionary()
 {
     // Define the array that holds all data
@@ -363,9 +348,7 @@ void test()
     auto t7 = chrono::high_resolution_clock::now(); //get start time
     dispResult("7. Jump", index, t7 - t6);
 
-    index= binary_search(arr.begin(),arr.edn, key);
-
-    cout << "//////////////////////////////////////////////////////////" << endl;
+      cout << "//////////////////////////////////////////////////////////" << endl;
     cout << left << setw(20) << "Total searching time: " << chrono::duration_cast<chrono::microseconds>(t7 - t0).count() << " ms." << endl;
 }
 
