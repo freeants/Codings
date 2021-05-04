@@ -1,3 +1,4 @@
+package misc;
 /*
  *  ComboOf10.java - Test to output the combinations of a+b+c+d = 10, when either a->d >=5
  *  Copyright: freeants, All rights reserved.

@@ -1,3 +1,5 @@
+package misc;
+
 /*
    ComboOfN.java - Test to output the combinations of C(N,M), with other conditions
    Copyright: freeants, All rights reserved.

@@ -1,4 +1,4 @@
-
+package misc;
 
 public class HelloRunnable implements Runnable {
 

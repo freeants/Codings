@@ -1,3 +1,5 @@
+package misc;
+
 /*
     Sort2DArray.java - Find max item of each row, output each and their sum.
     Author: freeants, All rights reserved.

@@ -1,3 +1,5 @@
+package totorial;
+
 
 /*
     Dyna2DArray.java - Find min item of each row, output each and their sum, no col confilics.

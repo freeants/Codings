@@ -1,3 +1,4 @@
+package misc;
 
 /*
    ComboTest.java - Test to output the combinations of C(N,M), with other conditions.
