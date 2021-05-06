@@ -75,7 +75,7 @@ static auto dispResult = [](string str, auto diffTime, int *arr) {
  * Worst-case space complexity: O(1)/O(1) total/auxiliary
  * Stable: yes, Method: Exchanging, Note: Tiny code size
  */
-void bubbleSort(int A[], int n)
+void bubbleSort(int *A, int n)
 {
     int newn;
     while (n > 1)
@@ -110,7 +110,7 @@ void bubbleSort(int A[], int n)
  * Worst-case space complexity: O(log n)
  * Stable: No, Method: Partitioning, Note: in-place with O(log n) stack space 
  */
-void quickSort(int A[], int lo, int hi)
+void quickSort(int *A, int lo, int hi)
 {
     int i = lo, j = hi;
     int tmp;
@@ -154,7 +154,7 @@ void quickSort(int A[], int lo, int hi)
  * Worst-case space complexity: O(n)/O(1) total/auxiliary
  * Stable: yes, Method: Insertion, Note: O(n + d), in the worst case over sequences that have d inversions.
  */
-void insertionSort(int A[], int n)
+void insertionSort(int *A, int n)
 {
     int i, j;
     for (i = 1; i < n; i++)
@@ -172,7 +172,7 @@ void insertionSort(int A[], int n)
  * shellSort() - Comparision Sort algorithm, insertion sorting
  * O(n^1.3), O(1), Unstable
  */
-void shellSort(int A[], int n)
+void shellSort(int *A, int n)
 {
     for (int gap = n / 2; gap > 0; gap /= 2)
     {
@@ -194,7 +194,7 @@ void shellSort(int A[], int n)
  * selectionSort() - Comparision Sort algorithm, selection sorting
  * O(n²), O(1), Unstable
  */
-void selectionSort(int A[], int n)
+void selectionSort(int *A, int n)
 {
     int i, j, minIndex;
     for (i = 0; i < n - 1; i++)
@@ -214,7 +214,7 @@ void selectionSort(int A[], int n)
  */
 // To heapify a subtree rooted with node i which is
 // an index in arr[]. n is size of heap
-void heapify(int A[], int n, int i)
+void heapify(int *A, int n, int i)
 {
     int largest = i;   // Initialize largest as root
     int l = 2 * i + 1; // left = 2*i + 1
@@ -237,7 +237,7 @@ void heapify(int A[], int n, int i)
     }
 }
 // main function to do heap sort
-void heapSort(int A[], int n)
+void heapSort(int *A, int n)
 {
     // Build heap (rearrange array)
     for (int i = n / 2 - 1; i >= 0; i--)
@@ -257,7 +257,7 @@ void heapSort(int A[], int n)
  * mergeSort() - Comparision Sort algorithm, merge sorting
  * O(nlog(n)), O(n), Stable
  */
-void merge(int A[], int low, int mid, int high)
+void merge(int *A, int low, int mid, int high)
 {
 
     int i = low, j = mid + 1, k = 0;
@@ -277,7 +277,7 @@ void merge(int A[], int low, int mid, int high)
         A[i] = tmp[k];
     delete[] tmp;
 }
-void mergeSort(int A[], int lo, int hi)
+void mergeSort(int *A, int lo, int hi)
 {
     if (lo >= hi)
     {
@@ -293,7 +293,7 @@ void mergeSort(int A[], int lo, int hi)
  * bucketSort() - Non-Comparision Sort algorithm, bucket sorting
  * O(n+k), O(n+k), Stable
  */
-void bucketSort(int A[], int n, int max)
+void bucketSort(int *A, int n, int max)
 {
     int i, j;
     int buckets[max];
@@ -361,7 +361,7 @@ void test()
          << "Is sorted?" << endl;
 
     auto t0 = chrono::high_resolution_clock::now(); //get start time
-    
+
     copyArry(a, t);
     bubbleSort(t, max_size);
     auto t1 = chrono::high_resolution_clock::now(); //get end time
