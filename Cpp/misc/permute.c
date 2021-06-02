@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <string.h>
 
+int cnt = 0;
+
 //function to swap two variables
 void swap(char *a, char *b)
 {
@@ -19,7 +21,11 @@ void permute(char *a, int l, int r)
 {
     int i;
     if (l == r)
-        printf("%s\n", a);
+    {
+        printf("%s\t", a);
+        cnt++;
+    }
+
     else
     {
         for (i = l; i <= r; i++)
@@ -31,7 +37,7 @@ void permute(char *a, int l, int r)
     }
 }
 
-int main(int argc, char const *argv[])
+int main(int argc, char *argv[])
 {
     if (argc != 2)
     {
@@ -41,5 +47,7 @@ int main(int argc, char const *argv[])
 
     int n = strlen(argv[1]);
     permute(argv[1], 0, n - 1);
+
+    printf("\nTotal %d permutations.\n", cnt);
     return 0;
 }
