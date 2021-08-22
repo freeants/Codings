@@ -69,5 +69,6 @@
         "javax",
         "com",
         "org"
-    ]
+    ],
+    "python.pythonPath": "/Users/ffu/miniconda3/bin/python"
 }
