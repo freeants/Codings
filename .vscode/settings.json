@@ -29,7 +29,8 @@
         "unordered_map": "cpp",
         "utility": "cpp",
         "vector": "cpp",
-        "exception": "cpp"
+        "exception": "cpp",
+        "iosfwd": "cpp"
     },
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
