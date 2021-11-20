@@ -10,7 +10,7 @@
 #include <stdlib.h> /* for srand() */
 #include <time.h>   /* for time() */
 
-int N = 20, X = -100, Y = 100; /* Number of randoms; range for random numbers [x, y] */
+int N = 20, X = -100, Y = 200; /* Number of randoms; range for random numbers [x, y] */
 int *a, *b;                    /* Arrays of orignial and sorted */
 int max, min, i_max, i_min;    /* max and min value and their index */
 
