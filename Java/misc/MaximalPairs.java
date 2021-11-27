@@ -9,6 +9,7 @@ public class MaximalPairs {
   static int n = 10;
   static int a, b, c, d, e, f, g, h, i, j, A, B;
   static long p;
+
   static boolean isIdentical(int arr[]) {
     for (int i = 0; i < n; i++)
       for (int j = i + 1; j < n; j++)
@@ -32,7 +33,7 @@ public class MaximalPairs {
 
     A = 10000 * a + 1000 * b + 100 * c + 10 * d + e;
     B = 10000 * f + 1000 * g + 100 * h + 10 * i + j;
-    //long p;
+    // long p;
     p = A * B;
 
     System.out.println(A + " * " + B + " = " + A * B);
