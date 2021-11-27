@@ -15,7 +15,7 @@
 #include <string>
 using namespace std;
 
-#define MAX_SIZE 1000000  // Size of data dictionary
+#define MAX_SIZE 100000   // Size of data dictionary
 #define SRC_FILE "M1.txt" // Source file name
 #define DST_FILE "M2.txt" // Destination file name
 
@@ -42,7 +42,7 @@ void FileSave(string file_name)
 {
     ofstream ofs(file_name);
     for (int i = 0; i < MAX_SIZE; i++)
-        ofs << a[i] << endl;
+        ofs << a[i] << "\n";
     ofs.close();
 }
 
