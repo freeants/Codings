@@ -6,17 +6,17 @@
 */
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <stdlib.h> /* for malloc() */
+#include <math.h>   /* for sqrtf() */
 
 #define PI 3.1415926
 
 int N;          /* define data sets N */
 float X, Y;     /* each coordinates (X, Y) */
-float **coords; /* a 2D (N-row, 2-col) float arry for holding all input [X,Y] */
+float **coords; /* a 2D (N-row, 2-col) float arry for holding all input (X,Y) */
 
 /*
- *  Get N and each [X, Y] and save into 2D array
+ *  Get N and each (X, Y) and save into 2D array
  */
 void GetInput()
 {
@@ -93,7 +93,7 @@ void FreeMem()
 
 int main()
 {
-    /* get N and [X, Y] */
+    /* get N and (X, Y) */
     GetInput();
 
     /* do tests */
