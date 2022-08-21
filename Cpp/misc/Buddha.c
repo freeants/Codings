@@ -34,8 +34,8 @@ int main() {
     for (y = 0; y < H; y++, q += W * 3)
         for (x = 0; x < W / 2; x++) {
             c = (unsigned char)(255 * powf((p[y][x] - minp) / (float)(maxp - minp), 0.5f));
-            q[(W / 2 - x) * 3] = q[(W / 2 - x) * 3 + 1] = 
-            q[(W / 2 + x - 1) * 3] = q[(W / 2 + x - 1) * 3 + 1] = c;
+            q[(W / 2 - x) * 3] = q[(W / 2 - x) * 3 + 1] =
+                                     q[(W / 2 + x - 1) * 3] = q[(W / 2 + x - 1) * 3 + 1] = c;
             q[(W / 2 - x) * 3 + 2] = q[(W / 2 + x - 1) * 3 + 2] = c * 2 < 255 ? c * 2 : 255;
         }
     svpng(fopen("buddhabrot.png", "wb"), W, H, img, 0);
