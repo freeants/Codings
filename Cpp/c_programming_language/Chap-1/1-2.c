@@ -1,5 +1,5 @@
 /**
- * hello.c - The classic "hello, world"
+ * 1-2.c - The classic "hello, world"
  **/
 #include <stdio.h>
 

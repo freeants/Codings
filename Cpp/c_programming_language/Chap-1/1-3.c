@@ -1,5 +1,5 @@
 /**
- * f2c.c - Print the table of Fahrenheit to Celsius equivalents.
+ * 1-3.c - Print the table of Fahrenheit to Celsius equivalents.
  * formula C=(5/9)(F-32)
  **/
 #include <stdio.h>
@@ -10,7 +10,7 @@ int main()
     float C, F, Step, lo, hi;
     Step = 20;
     lo = 0;
-    hi = 300;
+    hi = 400;
 
     for (F = lo; F <= hi; F += Step)
     {

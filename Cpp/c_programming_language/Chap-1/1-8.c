@@ -1,5 +1,5 @@
 /**
- * File: 1-8_count.c - Write a program to count blanks, tabs, and newlines.
+ * File: 1-8 - Write a program to count blanks, tabs, and newlines.
  */
 #include <stdio.h>
 

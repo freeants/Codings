@@ -1,3 +1,7 @@
+/**
+ * File: 1-5.c - Modify the temperature conversion program 
+ * to print the table in reverse order.
+ */
 #include <stdio.h>
 /* print Fahrenheit-Celsius table */
 int main()

@@ -1,5 +1,5 @@
 /**
- * 1-4_f2c.c - Print the table of Celsius to Fahrenheit equivalents.
+ * 1-4.c - Print the table of Celsius to Fahrenheit equivalents.
  * formula C=5*(F-32)/9, F=(9C+160)/5
  **/
 #include <stdio.h>
