@@ -36,7 +36,7 @@ int main(int argc, char const *argv[])
         }
         else if (state == OUT)
         {
-            state == IN;
+            state = IN;
             nc = 1;
         }
         else
@@ -52,7 +52,7 @@ int main(int argc, char const *argv[])
         printf("%5d - %5d : ", i, wl[i]);
         if (wl[i] > 0)
         {
-            if ((len = wl[i] = MAXHIST / maxvalue) <= 0)
+            if ((len = wl[i] * MAXHIST / maxvalue) <= 0)
                 len = 1;
         }
         else
