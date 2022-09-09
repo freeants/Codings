@@ -10,7 +10,7 @@
 #define OUT 0      /* outside a word           */
 
 /* print horizontal histogram                  */
-int main(int argc, char const *argv[])
+int main()
 {
     int c, i, nc, state;
     int len;
