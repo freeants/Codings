@@ -83,7 +83,11 @@ void ConsoleInput()
   for (i = 0; i < 9; i++)
   {
     printf("Row[%d] : ", i + 1);
-    scanf("%s", InputString);
+    if (!scanf("%s", InputString))
+    {
+      printf("Input error!\n");
+      return;
+    }
 
     for (j = 0; j < 9; j++)
     {
