@@ -25,12 +25,12 @@ void Factorial::compFact(int n)
     for (int i = 2; i <= n; ++i)
         fact *= i;
     std::cout << fact.get_str(10) << "\n";
-    //fact.
+    // fact.
 }
 int main(int argc, char **argv)
 {
     /** Check cmd line args */
-    if (a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 rgc != 2)
+    if (argc != 2)
     {
         printf("Usage: fact n\t//n is the integer for n!\n");
         return 1;
