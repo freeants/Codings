@@ -1,4 +1,4 @@
-// C program to generate magic squares
+// MagicMatrix.c - C program to generate magic squares
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>   // for isdigit()
@@ -32,8 +32,8 @@ void printMatrix(int n)
 {
 
     // Print magic matrix
-    printf("The Magic Matrix for n = %d, magic sum %d, ",
-           n, n * (n * n + 1) / 2);
+    printf("The Magic Matrix for n = %d, magic sum = %d*(%d²+1)/2 = %d. ",
+           n, n, n, n * (n * n + 1) / 2);
 
     // Print Odd and Even type
     if (isOdd)
