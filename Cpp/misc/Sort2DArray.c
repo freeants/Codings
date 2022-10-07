@@ -27,7 +27,7 @@ void deepToString(int **arr)
             if (c != N - 1)
                 printf("%d,", arr[r][c]); // print row items with ','
             else
-                printf("%d", arr[r][c]); // print lat row items without ','
+                printf("%d", arr[r][c]); // print last row items without ','
         }
         // handling last row ',' format
         if (r != M - 1)
