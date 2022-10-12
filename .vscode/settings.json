@@ -30,7 +30,9 @@
         "utility": "cpp",
         "vector": "cpp",
         "exception": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "gmp.h": "c",
+        "gmpxx.h": "c"
     },
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
