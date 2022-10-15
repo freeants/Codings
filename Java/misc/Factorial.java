@@ -22,7 +22,7 @@ public class Factorial {
     // Driver method
     public static void main(String args[]) throws Exception
     {
-        int N = 20;
+        int N = 100;
         System.out.println(factorial(N));
     }
 }
