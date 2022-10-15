@@ -32,7 +32,8 @@
         "exception": "cpp",
         "iosfwd": "cpp",
         "gmp.h": "c",
-        "gmpxx.h": "c"
+        "gmpxx.h": "c",
+        "cmath": "cpp"
     },
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
