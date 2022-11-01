@@ -33,7 +33,8 @@
         "iosfwd": "cpp",
         "gmp.h": "c",
         "gmpxx.h": "c",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "cstdlib": "c"
     },
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
