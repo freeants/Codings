@@ -11,7 +11,7 @@
 #include <algorithm>
 using namespace std;
 
-const int MAX = 1999999; // Size of data dictionary
+const int MAX = 99999999; // Size of data dictionary
 const int MIN = 0;
 
 int *arr; // Gloable data dictionary
@@ -258,6 +258,7 @@ int JumpSearch(int A[], int n, int T)
  * bucketSort() - Non-Comparision Sort algorithm, bucket sorting
  * O(n+k), O(n+k), Stable
  */
+/*
 void bucketSort(int A[], int n, int max)
 {
     int i, j;
@@ -276,7 +277,7 @@ void bucketSort(int A[], int n, int max)
         while ((buckets[i]--) > 0)
             A[j++] = i;
     }
-}
+}*/
 
 void BuildDataDictionary()
 {
@@ -298,9 +299,10 @@ void BuildDataDictionary()
     auto t1 = chrono::high_resolution_clock::now(); //get start time
     cout << "Building radom data set [" + to_string(MIN) + ", " + to_string(MAX) + "] ... " << chrono::duration_cast<chrono::microseconds>(t1 - t0).count() << " ms." << endl;
     // Sort the array for future searching
-    bucketSort(arr, MAX, MAX + 1);
+    // bucketSort(arr, MAX, MAX + 1);
+    sort(arr, arr + MAX);
     auto t2 = chrono::high_resolution_clock::now(); //get start time
-    cout << "Bucket Sorting for searching ... " << chrono::duration_cast<chrono::microseconds>(t2 - t1).count() << " ms." << endl;
+    cout << "Sorting data ... " << chrono::duration_cast<chrono::microseconds>(t2 - t1).count() << " ms." << endl;
 }
 
 /*
