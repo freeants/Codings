@@ -14,7 +14,8 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "/opt/homebrew/Cellar/gmp/6.2.1_1/include"
             ],
             "defines": [],
             "macFrameworkPath": [
@@ -23,7 +24,7 @@
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c11",
             "cppStandard": "c++17",
-            "intelliSenseMode": "clang-x64"
+            "intelliSenseMode": "macos-clang-arm64"
         }
     ],
     "version": 4
