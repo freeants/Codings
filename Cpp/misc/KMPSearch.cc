@@ -1,5 +1,4 @@
-// C++ program for implementation of KMP pattern searching
-// algorithm
+// C++ program for implementation of KMP pattern searching algorithm
 #include <iostream>
 #include <fstream>
 using namespace std;
@@ -74,7 +73,7 @@ void KMPSearch(char *pat, char *txt)
 
         if (j == M)
         {
-            printf("Found pattern at index %d \n", i - j - 1);
+            printf("Pattern found @ %d \n", i - j - 1);
             j = lps[j - 1];
         }
 
@@ -88,19 +87,6 @@ void KMPSearch(char *pat, char *txt)
         }
     }
 }
-
-/* Driver program to test above function
-int main()
-{
-    // char txt[] = "ABABDABACDABABCABAB";
-    // char pat[] = "ABABCABAB";
-    // printf("Enter birth date (YYYYMMDD): ");
-    // scanf("%s", &pat);
-    FileRead(SRC_FILE);
-    KMPSearch(pat, txt);
-    // delete[] txt, pat;
-    return 0;
-} */
 
 int main(int argc, char **argv)
 {
