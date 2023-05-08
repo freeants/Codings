@@ -6,7 +6,7 @@ using namespace std;
 #define MAX_SIZE 100000000 // Size of data dictionary
 
 char txt[MAX_SIZE]; // array for all data
-char *SRC_FILE;     // Filename to be searched
+char *FILENAME;     // Filename to be searched
 char *Pat;          // Pattern to search for
 
 void FileRead(string file_name)
@@ -93,15 +93,16 @@ int main(int argc, char **argv)
     // Check cmd line args
     if (argc != 3)
     {
-        cerr << "Usuage: KMPSearch Pattern FILE\n";
+        cerr << "syntax: KMPSearch Pattern_String FILE_NAME" << '\n';
+        ;
         return 1;
     }
     Pat = argv[1];
-    SRC_FILE = argv[2];
+    FILENAME = argv[2];
 
     try
     {
-        FileRead(SRC_FILE);
+        FileRead(FILENAME);
         KMPSearch(Pat, txt);
     }
     catch (const std::exception &e)

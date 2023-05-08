@@ -41,7 +41,6 @@ public:
 Chudnovsky::Chudnovsky()
 {
     // Constants
-    // DIGITS = 1000;   // prompt for user input
     A = 13591409;
     B = 545140134;
     C = 640320;
