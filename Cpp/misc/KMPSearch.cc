@@ -1,13 +1,14 @@
 // C++ program for implementation of KMP pattern searching
 // algorithm
-#include <bits/stdc++.h>
+#include <iostream>
+#include <fstream>
 using namespace std;
 
 #define MAX_SIZE 100000000 // Size of data dictionary
-#define SRC_FILE "Pi.txt"  // Source file name
 
-char txt[MAX_SIZE];      // array for all data
-char pat[] = "19740331"; // pattern to search for
+char txt[MAX_SIZE]; // array for all data
+char *SRC_FILE;     // Filename to be searched
+char *Pat;          // Pattern to search for
 
 void FileRead(string file_name)
 {
@@ -36,17 +37,11 @@ void computeLPSArray(char *pat, int M, int *lps)
             lps[i] = len;
             i++;
         }
-        else // (pat[i] != pat[len])
+        else
         {
-            // This is tricky. Consider the example.
-            // AAACAAAA and i = 7. The idea is similar
-            // to search step.
             if (len != 0)
             {
                 len = lps[len - 1];
-
-                // Also, note that we do not increment
-                // i here
             }
             else // if (len == 0)
             {
@@ -62,8 +57,6 @@ void KMPSearch(char *pat, char *txt)
     int M = strlen(pat);
     int N = strlen(txt);
 
-    // create lps[] that will hold the longest prefix suffix
-    // values for pattern
     int lps[M];
 
     // Preprocess the pattern (calculate lps[] array)
@@ -88,8 +81,6 @@ void KMPSearch(char *pat, char *txt)
         // mismatch after j matches
         else if (i < N && pat[j] != txt[i])
         {
-            // Do not match lps[0..lps[j-1]] characters,
-            // they will match anyway
             if (j != 0)
                 j = lps[j - 1];
             else
@@ -98,15 +89,37 @@ void KMPSearch(char *pat, char *txt)
     }
 }
 
-// Driver program to test above function
+/* Driver program to test above function
 int main()
 {
-    //char txt[] = "ABABDABACDABABCABAB";
-    //char pat[] = "ABABCABAB";
-    //printf("Enter birth date (YYYYMMDD): ");
-    //scanf("%s", &pat);
+    // char txt[] = "ABABDABACDABABCABAB";
+    // char pat[] = "ABABCABAB";
+    // printf("Enter birth date (YYYYMMDD): ");
+    // scanf("%s", &pat);
     FileRead(SRC_FILE);
     KMPSearch(pat, txt);
-    //delete[] txt, pat;
+    // delete[] txt, pat;
     return 0;
+} */
+
+int main(int argc, char **argv)
+{
+    // Check cmd line args
+    if (argc != 3)
+    {
+        cerr << "Usuage: KMPSearch Pattern FILE\n";
+        return 1;
+    }
+    Pat = argv[1];
+    SRC_FILE = argv[2];
+
+    try
+    {
+        FileRead(SRC_FILE);
+        KMPSearch(Pat, txt);
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }
