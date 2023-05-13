@@ -1,6 +1,9 @@
-/* Chud_Pi.cxx
+/* 
+   Chud_Pi.cxx
    Computing pi by Binary Splitting Algorithm with GMP libarary.
    clang++ -o chud_pi Chud_Pi.cxx -lgmpxx -lgmp -std=c++17 -O3
+   Author: ffu@alumni.sjtu.edu.cn
+   "No License, No nonsense"
 */
 
 #include <cmath>
@@ -9,7 +12,7 @@
 #include <string>
 #include <chrono>
 #include <iomanip>
-#include <gmpxx.h>
+#include "gmpxx.h"
 
 using namespace std;
 
