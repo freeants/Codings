@@ -115,9 +115,9 @@ int main(int argc, char **argv)
     }
     Pattern = argv[1];
     FILENAME = argv[2];
-    
+
     // set thousand separator
-    std::cout.imbue(std::locale(std::cout.getloc(), new space_out)); 
+    std::cout.imbue(std::locale(std::cout.getloc(), new space_out));
 
     try
     {
