@@ -13,6 +13,7 @@ public class E1_DefaultInit {
         System.out.println("i = " + i);
         System.out.println("c = " + c);
     }
+
     public static void main(final String args[]) {
         new E1_DefaultInit();
     }

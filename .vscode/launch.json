@@ -1,6 +1,27 @@
 {
     "configurations": [
         {
+            "type": "java",
+            "name": "ShowProperties",
+            "request": "launch",
+            "mainClass": "OJ8.ShowProperties",
+            "projectName": "Codings_9f096362"
+        },
+        {
+            "type": "java",
+            "name": "E1_DefaultInit",
+            "request": "launch",
+            "mainClass": "TIJ4.E1_DefaultInit",
+            "projectName": "Codings_9f096362"
+        },
+        {
+            "type": "java",
+            "name": "Factorial",
+            "request": "launch",
+            "mainClass": "misc.Factorial",
+            "projectName": "Codings_9f096362"
+        },
+        {
             "name": "C/C++: clang++ build and debug active file",
             "type": "cppdbg",
             "request": "launch",

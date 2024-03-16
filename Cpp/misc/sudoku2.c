@@ -1,3 +1,8 @@
+/* suduku2.c - Solver to sudoku problems.
+ * Original Author:  Lee Hsien Loong - Slightly modified to comply with the C99 standards.
+ * Compile: gcc -o suduku2 suduku2.c -std=c99 -O3
+ * Usage  : Use '-' or ‘0' for blank inputs.
+ */
 #include <stdio.h>
 
 int InBlock[81], InRow[81], InCol[81];
