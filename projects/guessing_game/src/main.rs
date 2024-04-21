@@ -3,14 +3,14 @@ use std::cmp::Ordering;
 use std::io;
 
 fn main() {
-    println!("Guess the number!");
+    println!("I have a secret number between 1..100, guess it with minimal tries.");
 
     let secret_number = rand::thread_rng().gen_range(1..=100);
-
-    println!("The secret number is: {secret_number}");
+    let mut tries = 0;
 
     loop {
-        println!("Please input your guess.");
+        tries = tries + 1;
+        println!("{tries}. Input your guess.");
 
         let mut guess = String::new();
 
@@ -29,7 +29,7 @@ fn main() {
             Ordering::Less => println!("Too small!"),
             Ordering::Greater => println!("Too big!"),
             Ordering::Equal => {
-                println!("You win!");
+                println!("You win! The secret number is {secret_number}, you tried {tries} times.");
                 break;
             }
         }

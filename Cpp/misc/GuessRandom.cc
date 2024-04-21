@@ -8,15 +8,15 @@ using namespace std;
 
 int main()
 {
-    int Guess;   //Guess number
-    int Attempt; //Guess attempts
-    int RndNum;  //The random "magic number"
+    int Guess;   // Guess number
+    int Attempt; // Guess attempts
+    int RndNum;  // The random "magic number"
 
-    random_device rd;                         //obtain a random number from hardware
-    mt19937 gen(rd());                        //seed the generator
-    uniform_int_distribution<> distr(MIN, MAX); //define the range
+    random_device rd;                           // obtain a random number from hardware
+    mt19937 gen(rd());                          // seed the generator
+    uniform_int_distribution<> distr(MIN, MAX); // define the range
 
-    RndNum = distr(gen); //assign the rand value to magic number
+    RndNum = distr(gen); // assign the rand value to magic number
 
     // Start Guess game
     cout << "Greetings! I have a number between " << MIN << " and " << MAX << " in mind." << endl
@@ -51,7 +51,7 @@ int main()
         {
             cout << "😆 Too high, yee land lubber!" << endl;
         }
-        else //input is equal to magic number
+        else // input is equal to magic number
         {
             cout << "Avast! Yee guessed my secret number, yee did! 😊 --> " << RndNum << endl;
             break; // end loop when correct
