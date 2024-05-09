@@ -3,5 +3,17 @@
 version = 3
 
 [[package]]
+name = "assert_eq"
+version = "0.1.0"
+
+[[package]]
 name = "hello_world"
+version = "0.1.0"
+
+[[package]]
+name = "print_char"
+version = "0.1.0"
+
+[[package]]
+name = "unit_size"
 version = "0.1.0"
