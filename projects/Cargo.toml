@@ -1,5 +1,5 @@
 [workspace]
 resolver = "2"
 members = [ "assert_eq",
-    "hello_world", "print_char", "unit_size",
+    "hello_world", "never_return", "print_char", "unit_size",
 ]

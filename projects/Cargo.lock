@@ -11,6 +11,10 @@ name = "hello_world"
 version = "0.1.0"
 
 [[package]]
+name = "never_return"
+version = "0.1.0"
+
+[[package]]
 name = "print_char"
 version = "0.1.0"
 
