@@ -12,7 +12,8 @@ fn never_return() -> ! {
         // sleeping for 1 second to avoid exhausting the cpu resource
         thread::sleep(time::Duration::from_secs(1))
     }
+   //panic!("I return nothing")
 }
 // Notes:
-// Above is method one the implement ! ruturn type. Another method is to use panic!() to replace the loop statment block:
+// Above is method one the implement ! ruturn type. Another method is to use panic!() or unimplemented!() or todo!(); to replace the loop statment block:
 // panic!("I return nothing")
