@@ -1,5 +1,5 @@
 [workspace]
 resolver = "2"
 members = [ "assert_eq",
-    "hello_world", "never_return", "print_char", "unit_size","hello_cargo"
+    "hello_world", "hello_cargo", "fah_cel_cvt", "car_factory", "fibonacci", "christmas_carol", "never_return", "print_char", "unit_size","hello_cargo","guessing_game","so_easy","read_file_contents"
 ]
