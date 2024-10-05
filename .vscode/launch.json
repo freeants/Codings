@@ -5,6 +5,13 @@
             "name": "ShowProperties",
             "request": "launch",
             "mainClass": "OJ8.ShowProperties",
+            "projectName": "Codings_6d850c50"
+        },
+        {
+            "type": "java",
+            "name": "ShowProperties",
+            "request": "launch",
+            "mainClass": "OJ8.ShowProperties",
             "projectName": "Codings_9f096362"
         },
         {
