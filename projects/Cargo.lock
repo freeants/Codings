@@ -7,6 +7,10 @@ name = "assert_eq"
 version = "0.1.0"
 
 [[package]]
+name = "build_a_car"
+version = "0.1.0"
+
+[[package]]
 name = "byteorder"
 version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -32,6 +36,10 @@ version = "0.1.0"
 
 [[package]]
 name = "fibonacci"
+version = "0.1.0"
+
+[[package]]
+name = "first_middle_last_name"
 version = "0.1.0"
 
 [[package]]
