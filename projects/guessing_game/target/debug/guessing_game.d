@@ -1,1 +1,1 @@
-/home/ffu/sources/repo/Codings/projects/guessing_game/target/debug/guessing_game: /home/ffu/sources/repo/Codings/projects/guessing_game/src/main.rs
+/home/ffu/source/repo/Codings/projects/guessing_game/target/debug/guessing_game: /home/ffu/source/repo/Codings/projects/guessing_game/src/main.rs
